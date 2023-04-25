@@ -1,0 +1,14 @@
+@import '@styles/reset';
+@import '@styles/normalize';
+@import '@styles/layouts';
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif, ui-sans-serif, system-ui, -apple-system, Arial;
+  font-size: 16px;
+}
+
+.text-center {
+  text-align: center;
+}
