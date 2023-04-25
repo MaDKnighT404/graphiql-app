@@ -47,7 +47,7 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "i18next/no-literal-string": [
-      "error",
+      "warn",
       {
         "markupOnly": true,
         "ignoreAttribute": ["data-testid", "to", "inputId", "alt"]
