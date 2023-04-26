@@ -5,8 +5,6 @@ import { Welcome } from 'Pages/Welcome';
 import { GraphQL } from 'Pages/GraphQl';
 import { NotFound } from 'Pages/NotFound';
 
-import './index.scss';
-
 export const App = () => {
   return (
     <Routes>
