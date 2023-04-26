@@ -1,5 +1,5 @@
 import './index.scss';
 
 export const Welcome = () => {
-  return <section className="Welcome">Welcome</section>;
+  return <section className="welcome">2</section>;
 };

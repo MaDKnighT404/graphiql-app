@@ -1,5 +1,5 @@
 import './index.scss';
 
 export const Auth = () => {
-  return <section className="Auth">Auth</section>;
+  return <section className="auth">1</section>;
 };

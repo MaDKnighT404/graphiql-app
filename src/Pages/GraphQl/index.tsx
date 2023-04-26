@@ -1,5 +1,5 @@
 import './index.scss';
 
 export const GraphQL = () => {
-  return <section className="GraphQL">GraphQL</section>;
+  return <section className="graphqL">3</section>;
 };

@@ -1,12 +1,11 @@
-import './index.scss';
-
 import { HelloWorld } from '../HelloWorld';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../providers/ThemeProvider';
 import classNames from 'classnames';
+import './index.scss';
 
 export const Header = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   return (
     <header className="header">
@@ -16,9 +15,9 @@ export const Header = () => {
             i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
           }}
         >
-          Switch lang
+          {t('Switch lang')}
         </button>
-        <button onClick={toggleTheme}> Switch theme </button>
+        <button onClick={toggleTheme}> {t('Switch theme')}</button>
         <HelloWorld />
       </div>
     </header>
