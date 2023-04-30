@@ -20,9 +20,8 @@
     "resolveJsonModule": true,
     "outDir": "dist",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": [

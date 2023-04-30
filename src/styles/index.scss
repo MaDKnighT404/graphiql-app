@@ -6,12 +6,7 @@
 @import 'themes/light';
 @import 'themes/dark';
 
-.App {
-  font: var(--font-m);
-  color: var(--primary-color);
-  background: var(--bg-color);
-}
-
-.ta-c {
-  text-align: center;
+body {
+  font-family: Inter, sans-serif, ui-sans-serif, system-ui, -apple-system, Arial;
+  font-size: 16px;
 }
