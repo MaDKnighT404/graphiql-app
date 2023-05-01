@@ -1,8 +1,7 @@
-import classNames from 'classnames';
-import { Button, ButtonTheme } from 'components/Button/Button';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useWindowDimensions } from 'shared/lib/hooks/useWindowDimensions/useWindowDimensions';
+import { Button, ButtonTheme } from 'components/Button/Button';
 
 interface LangSwitcherProps {
   className?: string;
@@ -18,7 +17,7 @@ export const LangSwitcher = memo((props: LangSwitcherProps) => {
   };
 
   return (
-    <Button className={classNames(className)} theme={ButtonTheme.OUTLINE} onClick={toggle}>
+    <Button className={className} theme={ButtonTheme.OUTLINE} onClick={toggle}>
       {width < 600 ? t('ShortLang') : t('Language')}
     </Button>
   );

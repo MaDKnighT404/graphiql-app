@@ -1,9 +1,9 @@
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Theme, useTheme } from 'app/providers/ThemeProvider';
 import { Button, ButtonTheme } from 'components/Button/Button';
 
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
 
 interface ThemeSwitcherProps {
   className?: string;

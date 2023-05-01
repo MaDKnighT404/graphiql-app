@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'app/providers/ThemeProvider';
 import { Button, ButtonTheme } from 'components/Button/Button';
+import { Text } from 'components/Text/Text';
 
 import classNames from 'classnames';
 
 import styles from './PageError.module.scss';
-import { Text } from 'components/Text/Text';
 
 interface PageErrorProps {
   className?: string;

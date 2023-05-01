@@ -11,5 +11,6 @@ function subscribe(callback: () => void) {
 
 function getSnapshot() {
   const { innerWidth: width, innerHeight: height } = window;
+  // TODO: deal with immutability issue
   return width;
 }
