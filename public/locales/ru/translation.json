@@ -5,8 +5,11 @@
   "Page not found": "Страница не найдена",
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary отловил непредвиденную ошибку",
   "Reload page": "Перезагрузить страницу",
-  "ShortLang": "En",
-  "Language": "English",
-  "Light": "Темная тема",
-  "Dark": "Светлая тема"
+  "Sumbit": "Submit",
+  "Email": "Эл.почта:",
+  "Password": "Пароль:",
+  "Registration": "Регистрация",
+  "Login": "Логин",
+  "Already have an account?": "Уже есть учетная запись?",
+  "Sign in": "Войти"
 }

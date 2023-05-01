@@ -5,8 +5,11 @@
   "Page not found": "Page not found",
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary has caught an Unexpected Error",
   "Reload page": "Reload page",
-  "Language": "Русский",
-  "ShortLang": "Ru",
-  "Light": "Light",
-  "Dark": "Dark"
+  "Sumbit": "Submit",
+  "Email": "Email:",
+  "Password": "Password:",
+  "Registration": "Registration",
+  "Login": "Login",
+  "Already have an account?": "Already have an account?",
+  "Sign in": "Sign in"
 }
