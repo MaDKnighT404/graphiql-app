@@ -1,24 +1,31 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+  logInWithEmailAndPassword,
+} from '../../firebase/firebase';
 
-import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../firebase/firebase';
-
-import { useAuthState } from 'react-firebase-hooks/auth';
-
-import { validationSchema } from 'helpers/validationSchema';
+import { validationSchemaSignIn, validationSchemaSignUp } from 'helpers/validationSchema';
 
 import styles from './AuthForm.module.scss';
 
 interface UserSubmitForm {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
 
 export const Auth = () => {
+  const [isReg, setIsReg] = useState(false);
+  const navigate = useNavigate();
   const { t } = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -30,38 +37,58 @@ export const Auth = () => {
       email: '',
       password: '',
     },
-    resolver: yupResolver(validationSchema),
+    resolver: isReg ? yupResolver(validationSchemaSignUp) : yupResolver(validationSchemaSignIn),
   });
-  console.log(errors);
+
   const onSubmit = (data: FieldValues) => {
-    registerWithEmailAndPassword(data.name, data.email, data.password);
+    if (!isReg) {
+      logInWithEmailAndPassword(data.email, data.password);
+      navigate('/graphql');
+    } else {
+      registerWithEmailAndPassword(data.name, data.email, data.password);
+      navigate('/graphql');
+    }
     reset();
   };
+
+  const handleChangeForm = () => {
+    setIsReg(!isReg);
+  };
+
   return (
     <div className={styles.authFormWrapper}>
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-        <h4 className={styles.formTitle}>{t('Registration')}</h4>
-        <label htmlFor="name" className={styles.formLabel}>
-          {t('Fullname')}
-          <input type="text" {...register('name')} id="name" />
-        </label>
-        {errors.name && <p className={styles.formError}>{errors.name.message}</p>}
+        <h4 className={styles.formTitle}>{isReg ? t('Sign up') : t('Sign in')}</h4>
+
+        {isReg && (
+          <label htmlFor="name" className={styles.formLabel}>
+            {t('Fullname')}
+            <input type="text" {...register('name')} id="name" />
+          </label>
+        )}
+        {isReg && errors.name && <p className={styles.formError}>{errors.name.message}</p>}
+
         <label htmlFor="email" className={styles.formLabel}>
           {t('Email')}
           <input type="text" {...register('email')} id="email" />
         </label>
         {errors.email && <p className={styles.formError}>{errors.email.message}</p>}
+
         <label htmlFor="password" className={styles.formLabel}>
           {t('Password')}
           <input type="password" {...register('password')} id="password" />
         </label>
         {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
+
         <button type="submit" className={styles.formSubmitBtn}>
-          {t('Submit')}
+          {isReg ? t('Create account') : t('Log in')}
         </button>
+
         <p className={styles.formMessage}>
-          {t('Already have an account?')}
-          <span className={styles.formSignIn}>{t('Sign in')}</span>
+          {isReg ? t('Already have an account?') : t("Don't have an account?")}
+          <span onClick={handleChangeForm} className={styles.formSignIn}>
+            {isReg ? t('Sign in') : t('Sign up')}
+          </span>
         </p>
       </form>
 

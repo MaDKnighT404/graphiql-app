@@ -6,11 +6,17 @@
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary отловил непредвиденную ошибку",
   "Reload page": "Перезагрузить страницу",
   "Submit": "Отправить",
+
   "Fullname": "Имя",
   "Email": "Эл.почта:",
   "Password": "Пароль:",
   "Registration": "Регистрация",
   "Login": "Логин",
   "Already have an account?": "Уже есть учетная запись?",
-  "Sign in": "Войти"
+  "Don't have an account?": "Ещё нет учетной записи?",
+  "Create account": "Создать аккаунт",
+  "Sign in": "Войти",
+  "Sign up": "Зарегистрироваться",
+  "Log in": "Авторизоваться",
+  "Logout": "Logout"
 }
