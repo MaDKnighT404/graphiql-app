@@ -1,8 +1,8 @@
 import { AppRouter } from 'app/providers/router';
 import { useTheme } from 'app/providers/ThemeProvider';
 
-import { Header } from './Header123/Header';
-import { Footer } from './Footer123/Footer';
+import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
 
 import classNames from 'classnames';
 
