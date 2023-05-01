@@ -6,6 +6,7 @@ import { Button, ButtonTheme } from 'components/Button/Button';
 import classNames from 'classnames';
 
 import styles from './PageError.module.scss';
+import { Text } from 'components/Text/Text';
 
 interface PageErrorProps {
   className?: string;
@@ -22,7 +23,7 @@ export const PageError: FC<PageErrorProps> = (props) => {
 
   return (
     <div className={classNames('app', theme, styles.pageError, className)}>
-      <p>{t('ErrorBoundary has caught an Unexpected Error')}</p>
+      <Text title={t('ErrorBoundary has caught an Unexpected Error')} />
       <Button onClick={reloadPage} theme={ButtonTheme.OUTLINE}>
         {t('Reload page')}
       </Button>

@@ -4,5 +4,9 @@
   "Switch theme": "Сменить тему",
   "Page not found": "Страница не найдена",
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary отловил непредвиденную ошибку",
-  "Reload page": "Перезагрузить страницу"
+  "Reload page": "Перезагрузить страницу",
+  "ShortLang": "En",
+  "Language": "English",
+  "Light": "Темная тема",
+  "Dark": "Светлая тема"
 }

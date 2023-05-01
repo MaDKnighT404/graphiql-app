@@ -7,7 +7,7 @@ export const NotFoundPage = () => {
 
   return (
     <section className={styles.notFound}>
-      <Text title="404" text={t('Page not found') as string} align={TextAlign.CENTER} />
+      <Text title="404" text={t('Page not found')} align={TextAlign.CENTER} />
     </section>
   );
 };
