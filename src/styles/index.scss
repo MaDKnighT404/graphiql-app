@@ -11,16 +11,18 @@ body {
 }
 
 #root {
+  display: flex;
   min-height: 100vh;
 }
 
 .app {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  font: var(--font-m);
+  width: 100%;
+  max-width: 1600px;
   color: var(--primary-color);
   background: var(--bg-color);
+  font: var(--font-m);
 }
 
 .main {
