@@ -2,5 +2,7 @@
   "Hello, world!": "Привет, мир!",
   "Switch lang": "Сменить язык",
   "Switch theme": "Сменить тему",
-  "Page not found": "Страница не найдена"
+  "Page not found": "Страница не найдена",
+  "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary отловил непредвиденную ошибку",
+  "Reload page": "Перезагрузить страницу"
 }

@@ -2,5 +2,7 @@
   "Hello, world!": "Hello, world!",
   "Switch lang": "Switch lang",
   "Switch theme": "Switch theme",
-  "Page not found": "Page not found"
+  "Page not found": "Page not found",
+  "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary has caught an Unexpected Error",
+  "Reload page": "Reload page"
 }
