@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   // sendPasswordResetEmail,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore';
 
@@ -63,14 +64,16 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
       authProvider: 'local',
       email,
     });
+
+    updateProfile(user, {
+      displayName: name,
+      photoURL: 'https://example.com/123',
+    });
   } catch (err) {
     console.error(err);
   }
 };
 
-const logout = () => {
-  signOut(auth);
-};
 
 export {
   auth,
@@ -79,5 +82,4 @@ export {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   // sendPasswordReset,
-  logout,
 };
