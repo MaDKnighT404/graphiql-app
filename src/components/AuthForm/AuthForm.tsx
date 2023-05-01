@@ -1,12 +1,18 @@
+import { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { auth, registerWithEmailAndPassword, signInWithGoogle } from '../../firebase/firebase';
+
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { validationSchema } from 'helpers/validationSchema';
 
 import styles from './AuthForm.module.scss';
 
 interface UserSubmitForm {
+  name: string;
   email: string;
   password: string;
 }
@@ -20,6 +26,7 @@ export const Auth = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm<UserSubmitForm>({
     defaultValues: {
+      name: '',
       email: '',
       password: '',
     },
@@ -27,13 +34,18 @@ export const Auth = () => {
   });
   console.log(errors);
   const onSubmit = (data: FieldValues) => {
+    registerWithEmailAndPassword(data.name, data.email, data.password);
     reset();
-    console.log(data);
   };
   return (
     <div className={styles.authFormWrapper}>
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
         <h4 className={styles.formTitle}>{t('Registration')}</h4>
+        <label htmlFor="name" className={styles.formLabel}>
+          {t('Fullname')}
+          <input type="text" {...register('name')} id="name" />
+        </label>
+        {errors.name && <p className={styles.formError}>{errors.name.message}</p>}
         <label htmlFor="email" className={styles.formLabel}>
           {t('Email')}
           <input type="text" {...register('email')} id="email" />

@@ -3,6 +3,13 @@ import * as yup from 'yup';
 export const validationSchema = yup
   .object()
   .shape({
+    name: yup
+      .string()
+      .required('Please enter your name')
+      .matches(
+        /^([А-ЯЁ][а-яё]{2,}|[A-Z][a-z]{2,})\s([А-ЯЁ][а-яё]{2,}|[A-Z][a-z]{2,})$/,
+        'Enter a valid name'
+      ),
     email: yup
       .string()
       .required('Please enter your email')
