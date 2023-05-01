@@ -1,6 +1,15 @@
-import styles from './AuthForm.module.scss';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { validationSchema } from 'helpers/validationSchema';
+
+import styles from './AuthForm.module.scss';
+
+interface UserSubmitForm {
+  email: string;
+  password: string;
+}
 
 export const Auth = () => {
   const { t } = useTranslation();
@@ -9,13 +18,14 @@ export const Auth = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitSuccessful },
-  } = useForm<FieldValues>({
+  } = useForm<UserSubmitForm>({
     defaultValues: {
       email: '',
       password: '',
     },
+    resolver: yupResolver(validationSchema),
   });
-  console.log(errors)
+  console.log(errors);
   const onSubmit = (data: FieldValues) => {
     reset();
     console.log(data);
@@ -26,14 +36,14 @@ export const Auth = () => {
         <h4 className={styles.formTitle}>{t('Registration')}</h4>
         <label htmlFor="email" className={styles.formLabel}>
           {t('Email')}
-          <input type="email" {...register('email')} id="email" />
-          {/* <p className={styles.formError}>{errors}</p> */}
+          <input type="text" {...register('email')} id="email" />
         </label>
+        {errors.email && <p className={styles.formError}>{errors.email.message}</p>}
         <label htmlFor="password" className={styles.formLabel}>
           {t('Password')}
           <input type="password" {...register('password')} id="password" />
-          {/* <p className={styles.formError}>{errors.password?.message}</p> */}
         </label>
+        {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
         <button type="submit" className={styles.formSubmitBtn}>
           {t('Submit')}
         </button>
