@@ -14,8 +14,8 @@ export const Header: React.FC = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    signOut(auth);
+  const handleLogout = async () => {
+    await signOut(auth);
     navigate('/');
   };
 

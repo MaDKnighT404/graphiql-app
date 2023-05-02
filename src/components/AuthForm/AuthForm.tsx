@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import {
   auth,
   registerWithEmailAndPassword,
@@ -41,12 +40,12 @@ export const Auth = () => {
     resolver: isReg ? yupResolver(validationSchemaSignUp) : yupResolver(validationSchemaSignIn),
   });
 
-  const onSubmit = (data: FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     if (!isReg) {
-      logInWithEmailAndPassword(data.email, data.password);
+      await logInWithEmailAndPassword(data.email, data.password);
       navigate('/graphql');
     } else {
-      registerWithEmailAndPassword(data.name, data.email, data.password);
+      await registerWithEmailAndPassword(data.name, data.email, data.password);
       navigate('/graphql');
     }
     reset();
