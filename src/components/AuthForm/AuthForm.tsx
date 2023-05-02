@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
-  auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
   logInWithEmailAndPassword,
   signInWithGithub,
 } from '../../firebase/firebase';
-
+import { Loader } from 'components/Loader/Loader';
 import { validationSchemaSignIn, validationSchemaSignUp } from 'helpers/validationSchema';
-
 import styles from './AuthForm.module.scss';
 
 interface UserSubmitForm {
@@ -25,12 +23,13 @@ export const Auth = () => {
   const [isReg, setIsReg] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<UserSubmitForm>({
     defaultValues: {
       name: '',
@@ -41,14 +40,17 @@ export const Auth = () => {
   });
 
   const onSubmit = async (data: FieldValues) => {
+    setLoading(true);
     if (!isReg) {
       await logInWithEmailAndPassword(data.email, data.password);
       navigate('/graphql');
     } else {
       await registerWithEmailAndPassword(data.name, data.email, data.password);
+      await logInWithEmailAndPassword(data.email, data.password);
       navigate('/graphql');
     }
     reset();
+    setLoading(false);
   };
 
   const handleChangeForm = () => {
@@ -109,14 +111,7 @@ export const Auth = () => {
           </span>
         </p>
       </form>
-
-      {isSubmitSuccessful && (
-        <div className={styles.formSumbitSuccessWrapper}>
-          <div className={styles.formSumbitSuccessInner}>
-            <span className={styles.formSuccessText}>User created!</span>
-          </div>
-        </div>
-      )}
+      {loading && <Loader />}
     </div>
   );
 };

@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'app/providers/ThemeProvider';
 import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
-import { auth, db } from 'firebase/firebase';
+import { auth } from 'firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -11,15 +10,13 @@ import styles from './Header.module.scss';
 export const Header: React.FC = () => {
   const { i18n, t } = useTranslation();
   const { toggleTheme } = useTheme();
-  const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
   const handleLogout = async () => {
     await signOut(auth);
     navigate('/');
   };
-
-  useEffect(() => {}, [user, signOut]);
 
   return (
     <header className={styles.header}>
