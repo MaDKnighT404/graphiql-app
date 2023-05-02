@@ -9,6 +9,7 @@ import {
   registerWithEmailAndPassword,
   signInWithGoogle,
   logInWithEmailAndPassword,
+  signInWithGithub,
 } from '../../firebase/firebase';
 
 import { validationSchemaSignIn, validationSchemaSignUp } from 'helpers/validationSchema';
@@ -55,6 +56,16 @@ export const Auth = () => {
     setIsReg(!isReg);
   };
 
+  const handleGoogleLogin = () => {
+    signInWithGoogle();
+    navigate('/graphql');
+  };
+
+  const handleGithubLogin = () => {
+    signInWithGithub();
+    navigate('/graphql');
+  };
+
   return (
     <div className={styles.authFormWrapper}>
       <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
@@ -82,6 +93,14 @@ export const Auth = () => {
 
         <button type="submit" className={styles.formSubmitBtn}>
           {isReg ? t('Create account') : t('Log in')}
+        </button>
+
+        <button onClick={handleGoogleLogin} type="button" className={styles.formSubmitBtn}>
+          {t('Login with Google')}
+        </button>
+
+        <button onClick={handleGithubLogin} type="button" className={styles.formSubmitBtn}>
+          {t('Login with Github')}
         </button>
 
         <p className={styles.formMessage}>
