@@ -20,7 +20,6 @@ export const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-
       <Button
         onClick={() => {
           i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
@@ -35,7 +34,7 @@ export const Header: React.FC = () => {
       <Button onClick={handleLogout} size={ButtonSize.M} theme={ButtonTheme.OUTLINE}>
         {t('Logout')}
       </Button>
-      {user && <span>{user?.displayName}</span>}
+      {user && <span>${user.displayName}</span>}
     </header>
   );
 };

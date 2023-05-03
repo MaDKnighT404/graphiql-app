@@ -6,7 +6,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignUp } from 'helpers/validationSchema';
 import { logInWithEmailAndPassword, registerWithEmailAndPassword } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
-import styles from 'Authentication.module.scss';
+import styles from '../Authentication.module.scss';
 
 interface RegistrationFormValue {
   name: string;
