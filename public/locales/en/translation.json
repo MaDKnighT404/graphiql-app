@@ -5,8 +5,20 @@
   "Page not found": "Page not found",
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary has caught an Unexpected Error",
   "Reload page": "Reload page",
-  "Language": "Русский",
-  "ShortLang": "Ru",
-  "Light": "Light",
-  "Dark": "Dark"
+  "Submit": "Submit",
+
+  "Fullname": "Fullname",
+  "Email": "Email:",
+  "Password": "Password:",
+  "Registration": "Registration",
+  "Login": "Login",
+  "Already have an account?": "Already have an account?",
+  "Don't have an account?": "Don't have an account?",
+  "Create account": "Create account",
+  "Sign in": "Sign in",
+  "Sign up": "Sign up",
+  "Log in": "Login",
+  "Logout": "Logout",
+  "Login with Google": "Login with Google",
+  "Login with Github": "Login with Github"
 }
