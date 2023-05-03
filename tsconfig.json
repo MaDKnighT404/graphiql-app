@@ -26,7 +26,8 @@
   },
   "include": [
     "./src/**/*",
-    "styled.d.ts"
+    "styled.d.ts",
+    "custom.d.ts"
   ],
   "references": [
     {

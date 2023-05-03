@@ -1,0 +1,51 @@
+.panel {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex: 1;
+
+  .session {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px;
+    overflow:hidden;
+
+    .queryEditor {
+      display: flex;
+      flex: 3 1 0;
+      flex-direction: row;
+    }
+  }
+
+}
+
+
+
+
+.result {
+  flex: 1 1 0%
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+
+  .playBtn {
+    width: 20px;
+    height: 20px;
+  }
+
+}
+
+
+
