@@ -5,12 +5,13 @@ import { auth } from 'firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
+import { LangSwitcher } from 'components/LangSwitcher/LangSwitcher';
+import { ThemeSwitcher } from 'components/ThemeSwitcher/ThemeSwitcher';
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
-  const { i18n, t } = useTranslation();
-  const { toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [user] = useAuthState(auth);
 
   const handleLogout = async () => {
@@ -20,21 +21,13 @@ export const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <Button
-        onClick={() => {
-          i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
-        }}
-      >
-        {t('Switch lang')}
-      </Button>
-      <Button onClick={toggleTheme} size={ButtonSize.L} theme={ButtonTheme.OUTLINE}>
-        {t('Switch theme')}
-      </Button>
+      <LangSwitcher />
+      <ThemeSwitcher />
 
       <Button onClick={handleLogout} size={ButtonSize.M} theme={ButtonTheme.OUTLINE}>
         {t('Logout')}
       </Button>
-      {user && <span>${user.displayName}</span>}
+      {user && <span>{user.displayName}</span>}
     </header>
   );
 };
