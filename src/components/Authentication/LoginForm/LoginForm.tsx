@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
+import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignIn } from 'helpers/validationSchema';
 import { logInWithEmailAndPassword } from 'firebase/firebase';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import styles from '../Authentication.module.scss';
 import { Loader } from 'components/Loader/Loader';
+import styles from 'Authentication.module.scss';
 
 interface formProps {
   handleGoogleLogin: () => void;

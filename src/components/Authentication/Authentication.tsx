@@ -1,13 +1,13 @@
-import { signInWithGoogle, signInWithGithub } from '../../firebase/firebase';
-import { RegistrationModal } from './RegistrationForm/RegistrationForm';
-import { LoginModal } from './LoginForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import styles from './Authentication.module.scss';
+import { signInWithGoogle, signInWithGithub } from 'firebase/firebase';
+import { LoginModal } from './LoginForm/LoginForm';
+import { RegistrationModal } from './RegistrationForm/RegistrationForm';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   changeAuthenticationForm,
   selectAuthValues,
 } from 'redux/features/auth/authenticationSlice';
+import styles from './Authentication.module.scss';
 
 export const Authentication = () => {
   const navigate = useNavigate();

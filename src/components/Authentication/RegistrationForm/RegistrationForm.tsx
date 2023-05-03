@@ -1,12 +1,12 @@
-import { useTranslation } from 'react-i18next';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { validationSchemaSignUp } from 'helpers/validationSchema';
-import { FieldValues, useForm } from 'react-hook-form';
-import { logInWithEmailAndPassword, registerWithEmailAndPassword } from 'firebase/firebase';
-import { useNavigate } from 'react-router-dom';
-import { Loader } from 'components/Loader/Loader';
 import { useState } from 'react';
-import styles from '../Authentication.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useTranslation } from 'react-i18next';
+import { FieldValues, useForm } from 'react-hook-form';
+import { validationSchemaSignUp } from 'helpers/validationSchema';
+import { logInWithEmailAndPassword, registerWithEmailAndPassword } from 'firebase/firebase';
+import { Loader } from 'components/Loader/Loader';
+import styles from 'Authentication.module.scss';
 
 interface RegistrationFormValue {
   name: string;
