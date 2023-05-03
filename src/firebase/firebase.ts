@@ -6,7 +6,6 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  // sendPasswordResetEmail,
   updateProfile,
 } from 'firebase/auth';
 import { getFirestore, query, getDocs, collection, where, addDoc } from 'firebase/firestore';
@@ -101,5 +100,4 @@ export {
   signInWithGithub,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
-  // sendPasswordReset,
 };

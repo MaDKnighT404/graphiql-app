@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import styles from './WelcomePage.module.scss';
-import { Auth } from 'components/AuthForm/AuthForm';
+import { Authentication } from 'components/Authentication/Authentication';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase/firebase';
+import styles from './WelcomePage.module.scss';
+import { Loader } from 'components/Loader/Loader';
 
 export const WelcomePage = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,12 +15,20 @@ export const WelcomePage = () => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate('/graphql');
-  }, [user, loading]);
+    if (user) {
+      navigate('/graphql');
+    }
+  }, [user, loading, navigate]);
 
   return (
-    <section className={styles.welcome}>
-      <Auth />
-    </section>
+    <>
+      {!loading ? (
+        <section className={styles.welcome}>
+          <Authentication />
+        </section>
+      ) : (
+        <Loader />
+      )}
+    </>
   );
 };
