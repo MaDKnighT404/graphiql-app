@@ -4,5 +4,9 @@
   "Switch theme": "Switch theme",
   "Page not found": "Page not found",
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary has caught an Unexpected Error",
-  "Reload page": "Reload page"
+  "Reload page": "Reload page",
+  "Language": "Русский",
+  "ShortLang": "Ru",
+  "Light": "Light",
+  "Dark": "Dark"
 }
