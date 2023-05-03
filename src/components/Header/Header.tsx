@@ -1,12 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { useTheme } from 'app/providers/ThemeProvider';
 import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
 import { auth } from 'firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { LangSwitcher } from 'components/LangSwitcher/LangSwitcher';
-import { ThemeSwitcher } from 'components/ThemeSwitcher/ThemeSwitcher';
+import { Logo } from 'components/Logo';
+import { Options } from 'components/Options';
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
@@ -21,8 +20,8 @@ export const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <LangSwitcher />
-      <ThemeSwitcher />
+      <Logo />
+      <Options />
 
       <Button onClick={handleLogout} size={ButtonSize.M} theme={ButtonTheme.OUTLINE}>
         {t('Logout')}

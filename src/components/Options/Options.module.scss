@@ -1,0 +1,31 @@
+.engFlag,
+.rusFlag,
+.lightMode,
+.darkMode {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.15s ease-in;
+}
+
+.engFlag {
+  background: url(../../shared/assets/images/eng_flag.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.rusFlag {
+  background: url(../../shared/assets/images/rus_flag.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.lightMode {
+  background: url(../../shared/assets/images/sun.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.darkMode {
+  background: url(../../shared/assets/images/moon.svg) no-repeat;
+  background-size: 100% 100%;
+}
