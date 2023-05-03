@@ -5,19 +5,8 @@ import { EditorState } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
 import { defaultKeymap } from '@codemirror/commands';
 import classNames from 'classnames';
-// import { graphql as gql} from 'gql';
 import { graphql } from 'cm6-graphql';
-import { GraphQLList, GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { StreamLanguage } from '@codemirror/language';
-// import { graphql } from 'codemirror-graphql/cm6-legacy/mode';
 
-// const TestSchema = new GraphQLSchema({ query: Query })
-import { makeExecutableSchema } from 'graphql-tools';
-import { Query, Character } from 'gql/graphql';
-
-// const MyAppSchema = new GraphQLSchema({
-//   query: Query
-// });
 // `mutation mutationName {
 //   setString(value: "newString")
 // }`

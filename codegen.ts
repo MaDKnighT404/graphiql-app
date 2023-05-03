@@ -12,6 +12,7 @@ const config: CodegenConfig = {
         enumsAsTypes: true,
         futureProofEnums: true,
         withResultType: true,
+        withHooks: true,
       },
     },
   },
