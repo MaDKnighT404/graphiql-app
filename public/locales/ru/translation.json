@@ -4,5 +4,21 @@
   "Switch theme": "Сменить тему",
   "Page not found": "Страница не найдена",
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary отловил непредвиденную ошибку",
-  "Reload page": "Перезагрузить страницу"
+  "Reload page": "Перезагрузить страницу",
+  "Submit": "Отправить",
+
+  "Fullname": "Имя",
+  "Email": "Эл.почта:",
+  "Password": "Пароль:",
+  "Registration": "Регистрация",
+  "Login": "Логин",
+  "Already have an account?": "Уже есть учетная запись?",
+  "Don't have an account?": "Ещё нет учетной записи?",
+  "Create account": "Создать аккаунт",
+  "Sign in": "Войти",
+  "Sign up": "Зарегистрироваться",
+  "Logout": "Выйти",
+  "Log in": "Авторизоваться",
+  "Login with Google": "Авторизоваться с Google",
+  "Login with Github": "Авторизоваться с Github"
 }
