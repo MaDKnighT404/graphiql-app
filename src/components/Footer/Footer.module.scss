@@ -1,4 +1,25 @@
 .footer {
-  display: block;
+  height: 60px;
+  background-color: rgb(210, 210, 210);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   flex: 0 0 auto;
+
+  .teamWrapper {
+  }
+
+  .rsschoolWrapper {
+  }
+  .rsSchoolLogo,
+  .githubLogo {
+    height: 30px;
+    object-fit: cover;
+    margin: 0 10px;
+    transition: 0.2s ease-in;
+
+    &:hover {
+      transform: scale(1.10);
+    }
+  }
 }
