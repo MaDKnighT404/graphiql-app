@@ -1,3 +1,12 @@
+.options {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding: 5px;
+}
+
 .engFlag,
 .rusFlag,
 .lightMode,
@@ -21,11 +30,11 @@
 }
 
 .lightMode {
-  background: url(../../shared/assets/images/sun.svg) no-repeat;
+  background: url(../../shared/assets/images/icon-sun.svg) no-repeat;
   background-size: 100% 100%;
 }
 
 .darkMode {
-  background: url(../../shared/assets/images/moon.svg) no-repeat;
+  background: url(../../shared/assets/images/icon-moon.svg) no-repeat;
   background-size: 100% 100%;
 }

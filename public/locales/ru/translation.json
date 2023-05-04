@@ -20,5 +20,7 @@
   "Logout": "Выйти",
   "Log in": "Авторизоваться",
   "Login with Google": "Авторизоваться с Google",
-  "Login with Github": "Авторизоваться с Github"
+  "Login with Github": "Авторизоваться с Github",
+
+  "Hello":"Привет"
 }
