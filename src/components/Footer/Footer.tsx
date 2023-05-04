@@ -5,7 +5,7 @@ import styles from './Footer.module.scss';
 export const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className={styles.teamWrapper}>
+      <div>
         <a href="https://github.com/egatsak">
           <img src={githubLogo} className={styles.githubLogo} alt="Github logo" />
         </a>
@@ -16,12 +16,12 @@ export const Footer = () => {
           <img src={githubLogo} className={styles.githubLogo} alt="Github logo" />
         </a>
       </div>
+
       <p>2023</p>
-      <div className={styles.rsschoolWrapper}>
-        <a href="https://rs.school/">
-          <img src={rsSchoolLogo} className={styles.rsSchoolLogo} alt="RSSchool logo" />
-        </a>
-      </div>
+
+      <a href="https://rs.school/">
+        <img src={rsSchoolLogo} className={styles.rsSchoolLogo} alt="RSSchool logo" />
+      </a>
     </footer>
   );
 };
