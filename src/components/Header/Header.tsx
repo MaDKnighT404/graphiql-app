@@ -6,9 +6,11 @@ import styles from './Header.module.scss';
 export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
-      <Logo />
-      <User />
-      <Options />
+      <div className={styles.headerContainer}>
+        <Logo />
+        <User />
+        <Options />
+      </div>
     </header>
   );
 };

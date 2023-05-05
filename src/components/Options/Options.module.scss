@@ -1,7 +1,7 @@
 .options {
   display: flex;
+  gap: 10px;
   justify-content: space-between;
-  width: 100px;
   border: 1px solid gray;
   border-radius: 15px;
   padding: 5px;
@@ -10,9 +10,11 @@
 .engFlag,
 .rusFlag,
 .lightMode,
-.darkMode {
-  width: 40px;
-  height: 40px;
+.darkMode,
+.logout
+{
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: 1px solid transparent;
   cursor: pointer;
@@ -38,3 +40,27 @@
   background: url(../../shared/assets/images/icon-moon.svg) no-repeat;
   background-size: 100% 100%;
 }
+
+.logout {
+  background: url(../../shared/assets/images/logout.svg) no-repeat;
+  background-size: 100% 100%;
+  color: #3237d4;
+}
+
+// .userLogoutBtn {
+//   width: 30px;
+//   height: 30px;
+//   margin: 0 auto;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-position: center;
+//   border: 1px solid transparent;
+//   border-radius: 50%;
+//   background-color: var(--inverted-primary-color);
+//   cursor: pointer;
+
+//   .logoutIcon {
+//     fill: var(--primary-color);
+//   }
+// }

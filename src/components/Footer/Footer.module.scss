@@ -1,10 +1,14 @@
 .footer {
   height: 60px;
   background-color: rgb(210, 210, 210);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex: 0 0 auto;
+
+  .footerContainer {
+    max-width: 1600px;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 
   .rsSchoolLogo,
   .githubLogo {
@@ -14,7 +18,7 @@
     transition: 0.2s ease-in;
 
     &:hover {
-      transform: scale(1.10);
+      transform: scale(1.1);
     }
   }
 }
