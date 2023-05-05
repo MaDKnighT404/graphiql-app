@@ -80,7 +80,7 @@ export const LoginModal: React.FC<formProps> = ({
       </button>
 
       <p className={styles.formMessage}>
-        {t("Don't have an account?")}
+        <span>{t("Don't have an account?")}</span>
         <span onClick={handleChangeForm} className={styles.formSignIn}>
           {t('Sign up')}
         </span>

@@ -2,7 +2,9 @@
   flex: 0 0 auto;
   padding: 0 20px;
   background: rgb(203, 202, 202);
-  
+  position: sticky;
+  top: 0;
+
   .headerContainer {
     max-width: 1600px;
     margin: 0 auto;

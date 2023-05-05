@@ -91,7 +91,7 @@ export const RegistrationModal: React.FC<FormProps> = ({
       </button>
 
       <p className={styles.formMessage}>
-        {t('Already have an account?')}
+        <span>{t('Already have an account?')}</span>
         <span onClick={handleChangeForm} className={styles.formSignIn}>
           {t('Sign in')}
         </span>
