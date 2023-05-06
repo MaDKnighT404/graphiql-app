@@ -3,34 +3,53 @@ import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
 import { Editor } from 'components/GraphQlPage/Editor/Editor';
 import { ReactComponent as Play } from '@/shared/assets/icons/play.svg';
 import classNames from 'classnames';
-import { EditorTools } from '../EditorTools/EditorTools';
+import { Tools } from '../Tools/Tools';
 import { graphql } from 'gql';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, useLazyQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+import CodeMirror from '@uiw/react-codemirror';
+
+const tempQuery = `
+query AllCharacters {
+  characters {
+    results {
+      id
+      name
+    }
+  }
+}
+`;
 
 export const Panel = () => {
-  const query = graphql(`
-    query AllCharacters {
-      characters {
-        results {
-          id
-          name
-        }
-      }
-    }
-  `);
-  const { data } = useQuery(query);
-  console.log(data);
+  const [query, setQuery] = useState(tempQuery);
+  const [variables, setVariables] = useState('');
+  const [headers, setHeaders] = useState('');
+  const [getData, { loading, data, error }] = useLazyQuery(gql(tempQuery));
+  const props = {
+    variables,
+    headers,
+    setVariables,
+    setHeaders,
+  };
 
-  function handleOnClick() {
-    console.log('get mirrow text');
+  function handleClick() {
+    let tempVariables;
+    try {
+      tempVariables = JSON.parse(variables);
+    } catch (e) {
+      tempVariables = '';
+    }
+    console.log('test', variables);
+    getData({ query: gql(query), variables: tempVariables });
   }
+
   return (
     <div className={styles.panel}>
       <div className={styles.session}>
         <div className={styles.queryEditor}>
-          <Editor />
+          <Editor query={query} setQuery={setQuery} />
           <Button
-            onClick={handleOnClick}
+            onClick={handleClick}
             size={ButtonSize.M}
             theme={ButtonTheme.OUTLINE}
             className={styles.btn}
@@ -38,38 +57,16 @@ export const Panel = () => {
             <Play className={styles.playBtn} />
           </Button>
         </div>
-        {/* <div className={styles.tools}>
-          <div className={styles.tabs}>
-            <Button
-              onClick={handleOnClick}
-              size={ButtonSize.M}
-              theme={ButtonTheme.OUTLINE}
-              className={styles.btn}
-            >
-              Variables
-            </Button>
-            <Button
-              onClick={handleOnClick}
-              size={ButtonSize.M}
-              theme={ButtonTheme.OUTLINE}
-              className={styles.btn}
-            >
-              Headers
-            </Button>
-          </div>
-          <Button
-            onClick={handleOnClick}
-            size={ButtonSize.M}
-            theme={ButtonTheme.OUTLINE}
-            className={styles.btn}
-          >
-            ^
-          </Button>
-        </div> */}
-        <EditorTools />
+        <Tools {...props} />
         <div className={classNames(styles.toolsEditor, { [styles.hideToolsEditor]: true })}></div>
       </div>
-      <div className={styles.result}>{JSON.stringify(data)}</div>
+      <div className={styles.result}>
+        <CodeMirror
+          className={styles.resultCode}
+          value={JSON.stringify(error ? error : data, null, ' ')}
+          editable={false}
+        />
+      </div>
     </div>
   );
 };
