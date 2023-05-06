@@ -4,9 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignIn } from 'helpers/validationSchema';
-import { logInWithEmailAndPassword } from 'firebase/firebase';
+import { auth } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
 import styles from '../Authentication.module.scss';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { selectAuthValues, setError } from 'redux/features/auth/authenticationSlice';
 
 interface formProps {
   handleGoogleLogin: () => void;
@@ -26,6 +29,8 @@ export const LoginModal: React.FC<formProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { ...state } = useAppSelector(selectAuthValues);
   const { t } = useTranslation();
 
   const {
@@ -44,11 +49,17 @@ export const LoginModal: React.FC<formProps> = ({
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
 
-    await logInWithEmailAndPassword(data.email, data.password);
-    navigate('/graphql');
+    await signInWithEmailAndPassword(auth, data.email, data.password).catch((err) => {
+      if (err.code === 'auth/user-not-found') {
+        dispatch(setError('User not found'));
+      } else if (err.code === 'auth/wrong-password') {
+        dispatch(setError('Wrong password'));
+      }
+    });
 
     reset();
     setLoading(false);
+    navigate('/graphql');
   };
 
   return (
@@ -85,6 +96,9 @@ export const LoginModal: React.FC<formProps> = ({
           {t('Sign up')}
         </span>
       </p>
+      {state.error && (
+        <span>{state.error === 'User not found' ? t('User not found') : t('Wrong password')}</span>
+      )}
       {loading && <Loader />}
     </form>
   );

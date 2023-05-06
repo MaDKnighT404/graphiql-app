@@ -22,5 +22,9 @@
   "Login with Google": "Login with Google",
   "Login with Github": "Login with Github",
 
+  "User not found": "User not Found",
+  "Wrong password": "Wrong password",
+  "This user already exist": "This user already exists",
+
   "Hello": "Hello"
 }

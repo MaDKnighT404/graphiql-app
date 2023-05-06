@@ -4,8 +4,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignUp } from 'helpers/validationSchema';
-import { logInWithEmailAndPassword, registerWithEmailAndPassword } from 'firebase/firebase';
+import { registerWithEmailAndPassword } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { selectAuthValues, setError } from 'redux/features/auth/authenticationSlice';
 import styles from '../Authentication.module.scss';
 
 interface RegistrationFormValue {
@@ -28,6 +30,8 @@ export const RegistrationModal: React.FC<FormProps> = ({
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { ...state } = useAppSelector(selectAuthValues);
 
   const {
     register,
@@ -45,15 +49,14 @@ export const RegistrationModal: React.FC<FormProps> = ({
 
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
-    try {
-      await registerWithEmailAndPassword(data.name, data.email, data.password);
-      await logInWithEmailAndPassword(data.email, data.password);
-      navigate('/graphql');
-    } catch (err) {
-      console.error(err);
-    }
+    await registerWithEmailAndPassword(data.name, data.email, data.password).catch((err) => {
+      if (err.code === 'auth/email-already-in-use') {
+        dispatch(setError('User already exist'));
+      }
+    });
     reset();
     setLoading(false);
+    navigate('/graphql');
   };
 
   return (
@@ -96,6 +99,7 @@ export const RegistrationModal: React.FC<FormProps> = ({
           {t('Sign in')}
         </span>
       </p>
+      {state.error && <span>{t('This user already exist')}</span>}
       {loading && <Loader />}
     </form>
   );

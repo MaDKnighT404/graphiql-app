@@ -22,5 +22,9 @@
   "Login with Google": "Авторизоваться с Google",
   "Login with Github": "Авторизоваться с Github",
 
-  "Hello":"Привет"
+  "User not found": "Пользователь не найден",
+  "Wrong password": "Неверный пароль",
+  "This user already exist": "Такой пользователь уже существует",
+
+  "Hello": "Привет"
 }
