@@ -49,6 +49,7 @@ export const RegistrationModal: React.FC<FormProps> = ({
 
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
+
     await registerWithEmailAndPassword(data.name, data.email, data.password).catch((err) => {
       if (err.code === 'auth/email-already-in-use') {
         dispatch(setError('User already exist'));
@@ -83,14 +84,6 @@ export const RegistrationModal: React.FC<FormProps> = ({
 
       <button type="submit" className={styles.formSubmitBtn}>
         {t('Create account')}
-      </button>
-
-      <button onClick={handleGoogleLogin} type="button" className={styles.formSubmitBtn}>
-        {t('Login with Google')}
-      </button>
-
-      <button onClick={handleGithubLogin} type="button" className={styles.formSubmitBtn}>
-        {t('Login with Github')}
       </button>
 
       <p className={styles.formMessage}>

@@ -1,6 +1,6 @@
 .footer {
   height: 60px;
-  background-color: rgb(210, 210, 210);
+  background-color: var(--footer-bg-color);
 
   .footerContainer {
     max-width: 1600px;

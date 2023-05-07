@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import {
   changeAuthenticationForm,
   selectAuthValues,
+  setError,
 } from 'redux/features/auth/authenticationSlice';
 import styles from './Authentication.module.scss';
 
@@ -16,6 +17,7 @@ export const Authentication = () => {
 
   const handleChangeForm = () => {
     dispatch(changeAuthenticationForm());
+    dispatch(setError(''));
   };
 
   const handleGoogleLogin = () => {
