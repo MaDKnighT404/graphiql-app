@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignIn } from 'helpers/validationSchema';
 import { auth } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
-import styles from '../Authentication.module.scss';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { selectAuthValues, setError } from 'redux/features/auth/authenticationSlice';
+import styles from '../Authentication.module.scss';
 
 interface formProps {
   handleGoogleLogin: () => void;
@@ -28,7 +27,6 @@ export const LoginModal: React.FC<formProps> = ({
   handleChangeForm,
 }) => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { ...state } = useAppSelector(selectAuthValues);
   const { t } = useTranslation();
@@ -56,10 +54,8 @@ export const LoginModal: React.FC<formProps> = ({
         dispatch(setError('Wrong password'));
       }
     });
-
     reset();
     setLoading(false);
-    navigate('/graphql');
   };
 
   return (
@@ -79,6 +75,7 @@ export const LoginModal: React.FC<formProps> = ({
           {...register('password')}
           id="password"
           className={styles.formInput}
+          autoComplete="current-password"
         />
       </label>
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}

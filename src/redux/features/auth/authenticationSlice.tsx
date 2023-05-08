@@ -36,9 +36,13 @@ const authSlice = createSlice({
     setError: (state: AuthValues, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    setUserName: (state: AuthValues, action: PayloadAction<string>) => {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { updateAuthValue, changeAuthenticationForm, setError } = authSlice.actions;
+export const { updateAuthValue, changeAuthenticationForm, setError, setUserName } =
+  authSlice.actions;
 export const selectAuthValues = (state: RootState) => state.auth;
 export const authReducer = authSlice.reducer;

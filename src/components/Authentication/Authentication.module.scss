@@ -18,9 +18,14 @@
 
     .formLabel {
       margin: 10px 0;
-
       .formInput {
         color: black;
+        border: 0px solid transparent;
+        &:focus {
+          border: 0;
+          outline: 0;
+        }
+
       }
     }
 

@@ -29,5 +29,7 @@
   "Wrong password": "Wrong password",
   "This user already exist": "This user already exists",
 
-  "Hello": "Hello"
+  "Hello": "Hello",
+
+  "Team":"Team Resolvers:"
 }

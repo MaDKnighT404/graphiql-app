@@ -11,10 +11,6 @@ export const WelcomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
-    }
     if (user) {
       navigate('/graphql');
     }

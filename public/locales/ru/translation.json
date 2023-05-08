@@ -29,5 +29,7 @@
   "Wrong password": "Неверный пароль",
   "This user already exist": "Такой пользователь уже существует",
 
-  "Hello": "Привет"
+  "Hello": "Привет",
+
+  "Team":"Команда Resolvers:"
 }

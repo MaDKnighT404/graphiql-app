@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -7,7 +6,7 @@ import { validationSchemaSignUp } from 'helpers/validationSchema';
 import { registerWithEmailAndPassword } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { selectAuthValues, setError } from 'redux/features/auth/authenticationSlice';
+import { selectAuthValues, setError, setUserName } from 'redux/features/auth/authenticationSlice';
 import styles from '../Authentication.module.scss';
 
 interface RegistrationFormValue {
@@ -17,18 +16,11 @@ interface RegistrationFormValue {
 }
 
 interface FormProps {
-  handleGoogleLogin: () => void;
-  handleGithubLogin: () => void;
   handleChangeForm: () => void;
 }
 
-export const RegistrationModal: React.FC<FormProps> = ({
-  handleGoogleLogin,
-  handleGithubLogin,
-  handleChangeForm,
-}) => {
+export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { ...state } = useAppSelector(selectAuthValues);
@@ -50,14 +42,18 @@ export const RegistrationModal: React.FC<FormProps> = ({
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
 
-    await registerWithEmailAndPassword(data.name, data.email, data.password).catch((err) => {
-      if (err.code === 'auth/email-already-in-use') {
-        dispatch(setError('User already exist'));
-      }
-    });
+    await registerWithEmailAndPassword(data.name, data.email, data.password)
+      .then(() => {
+        dispatch(setUserName(data.name));
+      })
+      .catch((err) => {
+        if (err.code === 'auth/email-already-in-use') {
+          dispatch(setError('User already exist'));
+        }
+      });
+
     reset();
     setLoading(false);
-    navigate('/graphql');
   };
 
   return (
@@ -89,6 +85,7 @@ export const RegistrationModal: React.FC<FormProps> = ({
           {...register('password')}
           id="password"
           className={styles.formInput}
+          autoComplete="current-password"
         />
       </label>
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
