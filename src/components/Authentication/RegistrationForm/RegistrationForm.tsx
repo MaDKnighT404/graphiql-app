@@ -5,8 +5,8 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignUp } from 'helpers/validationSchema';
 import { registerWithEmailAndPassword } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { selectAuthValues, setError, setUserName } from 'redux/features/auth/authenticationSlice';
+import { useAppDispatch } from 'redux/hooks';
+import { setError, setUserName } from 'redux/features/auth/authenticationSlice';
 import styles from '../Authentication.module.scss';
 
 interface RegistrationFormValue {
@@ -23,7 +23,6 @@ export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => 
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { ...state } = useAppSelector(selectAuthValues);
 
   const {
     register,
@@ -50,7 +49,7 @@ export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => 
         dispatch(setError(''));
         setTimeout(() => {
           if (err.code === 'auth/email-already-in-use') {
-            dispatch(setError('User already exist'));
+            dispatch(setError('This user already exist'));
           }
         });
       });
@@ -103,7 +102,6 @@ export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => 
           {t('Sign in')}
         </span>
       </p>
-      {state.error && <span>{t('This user already exist')}</span>}
       {loading && <Loader />}
     </form>
   );

@@ -18,5 +18,19 @@
     font-size: 18px;
     line-height: 28px;
     margin-bottom: 25px;
+    animation-name: textAppear;
+    animation-duration: 0.75s;
+  }
+}
+
+@keyframes textAppear {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
   }
 }

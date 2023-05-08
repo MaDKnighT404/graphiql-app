@@ -26,14 +26,23 @@ export const Authentication = () => {
   const handleGithubLogin = () => {
     signInWithGithub();
   };
-
+  t('This user already exist');
   return (
     <div className={styles.authFormWrapper}>
       {state.error && (
         <div className={styles.formErrorWrapper}>
-          <span>
-            {state.error === 'User not found' ? t('User not found') : t('Wrong password')}
-          </span>
+          {(() => {
+            switch (state.error) {
+              case 'User not found':
+                return t('User not found');
+              case 'Wrong password':
+                return t('Wrong password');
+              case 'This user already exist':
+                return t('This user already exist');
+              default:
+                return null;
+            }
+          })()}
         </div>
       )}
       {state.isReg ? (

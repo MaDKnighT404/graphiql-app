@@ -3,12 +3,14 @@ import { Authentication } from 'components/Authentication/Authentication';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase/firebase';
-import styles from './WelcomePage.module.scss';
 import { Loader } from 'components/Loader/Loader';
+import { useTranslation } from 'react-i18next';
+import styles from './WelcomePage.module.scss';
 
 export const WelcomePage = () => {
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user) {
@@ -20,18 +22,13 @@ export const WelcomePage = () => {
     <>
       {!loading ? (
         <section className={styles.welcome}>
-          <h1 className={styles.welcomeHeader}>Welcome to the GraphiQl clone!</h1>
+          <h1 className={styles.welcomeHeader}>{t('Welcome')}</h1>
           <div className={styles.welcomeTextWrapper}>
             <p>
-              GraphQL is a query language for APIs and a runtime for fulfilling those queries with
-              your existing data. GraphQL provides a complete and understandable description of the
-              data in your API, gives clients the power to ask for exactly what they need and
-              nothing more, makes it easier to evolve APIs over time, and enables powerful developer
-              tools.
+              {t('GraphQl is')}
               <br />
               <br />
-              To start using the application you must fill out the registration form or login if you
-              are already register.
+              {t('To start')}
             </p>
           </div>
           <Authentication />

@@ -8,9 +8,11 @@
 
   .formErrorWrapper {
     width: 290px;
-    height: 50px;
+    max-height: 150px;
     background-color: var(--form-bg-color);
-    line-height: 50px;
+    border: 1px solid var(--form-button-border-color);
+    line-height: 20px;
+    padding: 10px 0;
     text-align: center;
     border-radius: 10px;
     animation-name: errorAppears;
@@ -25,6 +27,7 @@
     max-width: 290px;
     padding: 30px;
     background: var(--form-bg-color);
+
     border-radius: 10px;
     box-shadow: 4px 4px 15px 0px var(--form-shadow-color);
     animation-name: formAppears;
@@ -61,6 +64,7 @@
 
     .formSignIn {
       cursor: pointer;
+      margin-top: 10px;
       padding: 0 10px;
       color: #fb5151;
       text-decoration: underline;

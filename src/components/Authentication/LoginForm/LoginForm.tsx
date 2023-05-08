@@ -6,8 +6,8 @@ import { validationSchemaSignIn } from 'helpers/validationSchema';
 import { auth } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { selectAuthValues, setError } from 'redux/features/auth/authenticationSlice';
+import { useAppDispatch } from 'redux/hooks';
+import { setError } from 'redux/features/auth/authenticationSlice';
 import styles from '../Authentication.module.scss';
 
 interface formProps {
@@ -28,7 +28,6 @@ export const LoginModal: React.FC<formProps> = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const { ...state } = useAppSelector(selectAuthValues);
   const { t } = useTranslation();
 
   const {
