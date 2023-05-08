@@ -8,11 +8,12 @@ import {
   setError,
 } from 'redux/features/auth/authenticationSlice';
 import styles from './Authentication.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const Authentication = () => {
   const dispatch = useAppDispatch();
   const { ...state } = useAppSelector(selectAuthValues);
-
+  const { t } = useTranslation();
   const handleChangeForm = () => {
     dispatch(changeAuthenticationForm());
     dispatch(setError(''));
@@ -28,6 +29,13 @@ export const Authentication = () => {
 
   return (
     <div className={styles.authFormWrapper}>
+      {state.error && (
+        <div className={styles.formErrorWrapper}>
+          <span>
+            {state.error === 'User not found' ? t('User not found') : t('Wrong password')}
+          </span>
+        </div>
+      )}
       {state.isReg ? (
         <RegistrationModal handleChangeForm={handleChangeForm} />
       ) : (

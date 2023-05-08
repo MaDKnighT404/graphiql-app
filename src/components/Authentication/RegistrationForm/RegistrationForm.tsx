@@ -47,9 +47,12 @@ export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => 
         dispatch(setUserName(data.name));
       })
       .catch((err) => {
-        if (err.code === 'auth/email-already-in-use') {
-          dispatch(setError('User already exist'));
-        }
+        dispatch(setError(''));
+        setTimeout(() => {
+          if (err.code === 'auth/email-already-in-use') {
+            dispatch(setError('User already exist'));
+          }
+        });
       });
 
     reset();

@@ -1,20 +1,22 @@
 import { Theme, useTheme } from 'app/providers/ThemeProvider';
 import { useTranslation } from 'react-i18next';
-import styles from './Options.module.scss';
 import { signOut } from 'firebase/auth';
 import { auth } from 'firebase/firebase';
-import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAppDispatch } from 'redux/hooks';
+import { setError } from 'redux/features/auth/authenticationSlice';
+import styles from './Options.module.scss';
 
 export const Options = () => {
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const { i18n } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   const [user] = useAuthState(auth);
 
   const handleLogout = async () => {
+    dispatch(setError(''));
     await signOut(auth);
-    navigate('/');
   };
 
   const toggleLang = () => {

@@ -1,9 +1,23 @@
 .authFormWrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   color: var(--secondary-color);
   margin-bottom: 25px;
 
+  .formErrorWrapper {
+    width: 290px;
+    height: 50px;
+    background-color: var(--form-bg-color);
+    line-height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    animation-name: errorAppears;
+    animation-duration: 0.75s;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 15px 0px var(--form-shadow-color);
+  }
   .authForm {
     display: flex;
     flex-direction: column;
@@ -14,7 +28,7 @@
     border-radius: 10px;
     box-shadow: 4px 4px 15px 0px var(--form-shadow-color);
     animation-name: formAppears;
-    animation-duration: .75s;
+    animation-duration: 0.75s;
 
     .formLabel {
       margin: 10px 0;
@@ -25,7 +39,6 @@
           border: 0;
           outline: 0;
         }
-
       }
     }
 
@@ -54,9 +67,6 @@
     }
 
     .formError {
-      max-width: 250px;
-      text-align: center;
-      margin-bottom: 10px;
       color: red;
       font-style: italic;
     }
@@ -66,6 +76,18 @@
 @keyframes formAppears {
   0% {
     transform: translateY(-100px);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes errorAppears {
+  0% {
+    transform: translateY(100px);
     opacity: 0.2;
   }
 

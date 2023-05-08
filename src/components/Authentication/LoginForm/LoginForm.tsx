@@ -48,12 +48,16 @@ export const LoginModal: React.FC<formProps> = ({
     setLoading(true);
 
     await signInWithEmailAndPassword(auth, data.email, data.password).catch((err) => {
-      if (err.code === 'auth/user-not-found') {
-        dispatch(setError('User not found'));
-      } else if (err.code === 'auth/wrong-password') {
-        dispatch(setError('Wrong password'));
-      }
+      dispatch(setError(''));
+      setTimeout(() => {
+        if (err.code === 'auth/user-not-found') {
+          dispatch(setError('User not found'));
+        } else if (err.code === 'auth/wrong-password') {
+          dispatch(setError('Wrong password'));
+        }
+      });
     });
+
     reset();
     setLoading(false);
   };
@@ -98,9 +102,7 @@ export const LoginModal: React.FC<formProps> = ({
           {t('Sign up')}
         </span>
       </p>
-      {state.error && (
-        <span>{state.error === 'User not found' ? t('User not found') : t('Wrong password')}</span>
-      )}
+
       {loading && <Loader />}
     </form>
   );
