@@ -22,6 +22,9 @@
   "Login with Google": "Авторизоваться с Google",
   "Login with Github": "Авторизоваться с Github",
 
+  "Name and surname": "Имя и фамилия. Первая буква каждого слова должна быть с большой буквы",
+
+
   "User not found": "Пользователь не найден",
   "Wrong password": "Неверный пароль",
   "This user already exist": "Такой пользователь уже существует",

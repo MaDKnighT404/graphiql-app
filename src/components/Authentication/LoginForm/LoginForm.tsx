@@ -68,13 +68,18 @@ export const LoginModal: React.FC<formProps> = ({
 
       <label htmlFor="email" className={styles.formLabel}>
         {t('Email')}
-        <input type="text" {...register('email')} id="email" />
+        <input type="text" {...register('email')} id="email" className={styles.formInput} />
       </label>
       {errors.email && <p className={styles.formError}>{errors.email.message}</p>}
 
       <label htmlFor="password" className={styles.formLabel}>
         {t('Password')}
-        <input type="password" {...register('password')} id="password" />
+        <input
+          type="password"
+          {...register('password')}
+          id="password"
+          className={styles.formInput}
+        />
       </label>
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
 

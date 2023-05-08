@@ -66,19 +66,30 @@ export const RegistrationModal: React.FC<FormProps> = ({
 
       <label htmlFor="name" className={styles.formLabel}>
         {t('Fullname')}
-        <input type="text" {...register('name')} id="name" />
+        <input
+          type="text"
+          {...register('name')}
+          id="name"
+          className={styles.formInput}
+          title={t('Name and surname') || undefined}
+        />
       </label>
       {errors.name && <p className={styles.formError}>{errors.name.message}</p>}
 
       <label htmlFor="email" className={styles.formLabel}>
         {t('Email')}
-        <input type="text" {...register('email')} id="email" />
+        <input type="text" {...register('email')} id="email" className={styles.formInput} />
       </label>
       {errors.email && <p className={styles.formError}>{errors.email.message}</p>}
 
       <label htmlFor="password" className={styles.formLabel}>
         {t('Password')}
-        <input type="password" {...register('password')} id="password" />
+        <input
+          type="password"
+          {...register('password')}
+          id="password"
+          className={styles.formInput}
+        />
       </label>
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
 

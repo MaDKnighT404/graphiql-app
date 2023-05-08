@@ -22,6 +22,9 @@
   "Login with Google": "Login with Google",
   "Login with Github": "Login with Github",
 
+  "Name and surname": "Name and surname. First letter of each word must be capitalized",
+  
+
   "User not found": "User not Found",
   "Wrong password": "Wrong password",
   "This user already exist": "This user already exists",
