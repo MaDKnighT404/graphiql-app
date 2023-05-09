@@ -20,13 +20,18 @@
     "resolveJsonModule": true,
     "outDir": "dist",
     "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ]
     }
   },
   "include": [
     "./src/**/*",
-    "styled.d.ts"
+    "styled.d.ts",
+    "custom.d.ts"
   ],
   "references": [
     {

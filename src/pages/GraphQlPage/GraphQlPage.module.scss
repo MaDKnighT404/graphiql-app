@@ -1,3 +1,33 @@
-.graphqL {
-  color: green;
+.graphql {
+  // color: green;
+  position: relative;
+  flex: 1;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  min-height: 0;
+
+
+}
+
+.sessions {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  // height: 100%;
+  max-height: 100%;
+  // max-width: 100%;
+  min-width: 320px;
+  border-radius: 10px;
+  background-color: red;
+  flex: 1;
+  min-height: 0;
+}
+
+.header{
+  display: flex;
+  justify-content: start;
+  padding: 5px;
 }
