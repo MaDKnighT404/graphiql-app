@@ -83,7 +83,7 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
     email,
   });
 
-  updateProfile(user, {
+  await updateProfile(user, {
     displayName: name,
     photoURL: 'https://example.com/123',
   });

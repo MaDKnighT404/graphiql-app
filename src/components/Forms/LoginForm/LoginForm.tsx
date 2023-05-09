@@ -3,32 +3,30 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignIn } from 'helpers/validationSchema';
-import { auth } from 'firebase/firebase';
+import { auth, signInWithGithub, signInWithGoogle } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useAppDispatch } from 'redux/hooks';
 import { setError } from 'redux/features/auth/authenticationSlice';
-import styles from '../Authentication.module.scss';
-
-interface formProps {
-  handleGoogleLogin: () => void;
-  handleGithubLogin: () => void;
-  handleChangeForm: () => void;
-}
+import styles from '../Forms.module.scss';
 
 interface LoginFormValues {
   email: string;
   password: string;
 }
 
-export const LoginModal: React.FC<formProps> = ({
-  handleGoogleLogin,
-  handleGithubLogin,
-  handleChangeForm,
-}) => {
+export const LoginModal = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle();
+  };
+
+  const handleGithubLogin = () => {
+    signInWithGithub();
+  };
 
   const {
     register,
@@ -63,7 +61,7 @@ export const LoginModal: React.FC<formProps> = ({
 
   return (
     <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={styles.formTitle}>{t('Sign in')}</h4>
+      <h4 className={styles.formTitle}>{t('Login')}</h4>
 
       <label htmlFor="email" className={styles.formLabel}>
         {t('Email')}
@@ -94,13 +92,6 @@ export const LoginModal: React.FC<formProps> = ({
       <button onClick={handleGithubLogin} type="button" className={styles.formSubmitBtn}>
         {t('Login with Github')}
       </button>
-
-      <p className={styles.formMessage}>
-        <span>{t("Don't have an account?")}</span>
-        <span onClick={handleChangeForm} className={styles.formSignIn}>
-          {t('Sign up')}
-        </span>
-      </p>
 
       {loading && <Loader />}
     </form>

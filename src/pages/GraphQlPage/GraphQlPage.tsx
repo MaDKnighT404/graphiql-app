@@ -16,15 +16,15 @@ export const GraphQlPage = () => {
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (loading) {
-  //     // maybe trigger a loading screen
-  //     return;
-  //   }
-  //   if (!user) {
-  //     navigate('/');
-  //   }
-  // }, [user, loading, navigate]);
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
+    if (!user) {
+      navigate('/');
+    }
+  }, [user, loading, navigate]);
 
   return (
     <ApolloProvider client={client}>

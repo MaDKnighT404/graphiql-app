@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Authentication } from 'components/Authentication/Authentication';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase/firebase';
@@ -12,11 +11,11 @@ export const WelcomePage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate('/graphql');
-  //   }
-  // }, [user, loading, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate('/graphql');
+    }
+  }, [user, loading, navigate]);
 
   return (
     <>

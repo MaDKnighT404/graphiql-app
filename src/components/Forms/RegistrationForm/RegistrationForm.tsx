@@ -7,7 +7,7 @@ import { registerWithEmailAndPassword } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
 import { useAppDispatch } from 'redux/hooks';
 import { setError, setUserName } from 'redux/features/auth/authenticationSlice';
-import styles from '../Authentication.module.scss';
+import styles from '../Forms.module.scss';
 
 interface RegistrationFormValue {
   name: string;
@@ -15,11 +15,7 @@ interface RegistrationFormValue {
   password: string;
 }
 
-interface FormProps {
-  handleChangeForm: () => void;
-}
-
-export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => {
+export const RegistrationModal = () => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
@@ -60,7 +56,7 @@ export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => 
 
   return (
     <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={styles.formTitle}>{t('Sign up')}</h4>
+      <h4 className={styles.formTitle}>{t('Registration')}</h4>
 
       <label htmlFor="name" className={styles.formLabel}>
         {t('Fullname')}
@@ -96,12 +92,6 @@ export const RegistrationModal: React.FC<FormProps> = ({ handleChangeForm }) => 
         {t('Create account')}
       </button>
 
-      <p className={styles.formMessage}>
-        <span>{t('Already have an account?')}</span>
-        <span onClick={handleChangeForm} className={styles.formSignIn}>
-          {t('Sign in')}
-        </span>
-      </p>
       {loading && <Loader />}
     </form>
   );

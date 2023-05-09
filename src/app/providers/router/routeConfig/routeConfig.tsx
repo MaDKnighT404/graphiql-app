@@ -1,4 +1,4 @@
-import { Authentication } from 'components/Authentication/Authentication';
+import { Auth } from 'pages/AuthPage/Auth';
 import { GraphQlPage } from 'pages/GraphQlPage/GraphQlPage';
 import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
 import { WelcomePage } from 'pages/WelcomePage/WelcomePage';
@@ -29,11 +29,11 @@ export const routeConfig: Record<AppRoutes, AppRouteProps> = {
   },
   [AppRoutes.SIGN_IN]: {
     path: RoutePath.sign_in,
-    element: <Authentication />,
+    element: <Auth />,
   },
   [AppRoutes.SIGN_UP]: {
     path: RoutePath.sign_up,
-    element: <Authentication />,
+    element: <Auth />,
   },
   [AppRoutes.GRAPHQL]: {
     path: RoutePath.graphql,

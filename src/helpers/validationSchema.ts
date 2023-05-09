@@ -17,8 +17,9 @@ export const validationSchemaSignUp = yup
     password: yup
       .string()
       .required('Please enter your password')
-      .min(6, 'Password must be at least 6 characters long')
+      .min(8, 'Password must be at least 8 characters long')
       .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .matches(/[0-9]/, 'Password must contain at least one digit')
       .test(
         'contains-one-special-character',
         'Password must contain at least one special character',
@@ -39,20 +40,6 @@ export const validationSchemaSignIn = yup
       .string()
       .required('Please enter your email')
       .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Enter a valid email'),
-    password: yup
-      .string()
-      .required('Please enter your password')
-      .min(6, 'Password must be at least 6 characters long')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .test(
-        'contains-one-special-character',
-        'Password must contain at least one special character',
-        (value) => {
-          if (value) {
-            return /[!@#$%^&*(),.?":{}|<>]/.test(value);
-          }
-          return true;
-        }
-      ),
+    password: yup.string().required('Please enter your password'),
   })
   .required();
