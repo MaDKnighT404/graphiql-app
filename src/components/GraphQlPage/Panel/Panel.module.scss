@@ -5,6 +5,8 @@
   flex: 1;
   max-height: 100%;
   padding: 5px;
+  min-height: 0;
+  // overflow: hidden;
 
 
   .session {
@@ -14,6 +16,7 @@
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
+    max-height: 100%;
 
     .queryEditor {
       display: flex;
@@ -21,32 +24,9 @@
       flex-direction: row;
       overflow-y: auto;
       overflow-x: auto;
-      max-height: 100vh;
+      // max-height: 100vh;
 
     }
-  }
-
-}
-
-.result {
-  height: 100%;
-  display: flex;
-  position: relative;
-  flex: 1;
-  scroll-behavior: auto;
-  overflow:auto;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: white;
-  padding: 5px;
-
-  .resultCode{
-    flex: 1 1 0%;
-    border-radius: 10px;
-    overflow:auto;
-    height: auto;
-    max-height: 600px // хз как ограничить
-    // max-height: 100%
   }
 
 }

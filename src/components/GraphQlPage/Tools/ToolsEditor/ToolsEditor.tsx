@@ -1,7 +1,7 @@
 import styles from './ToolsEditor.module.scss';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-import { Dispatch, SetStateAction, useCallback } from 'react';
+import { Dispatch, SetStateAction, memo, useCallback } from 'react';
 import { materialLight } from '@uiw/codemirror-theme-material';
 
 type Props = {
@@ -9,7 +9,8 @@ type Props = {
   setState: Dispatch<SetStateAction<string>>;
 };
 
-export const ToolsEditor = ({ state, setState }: Props) => {
+export const ToolsEditor = memo(function ToolsEditor({ state, setState }: Props) {
+  console.log('toolsEditor rendered');
   const onChange = useCallback((value: string) => {
     console.log('value:', value);
   }, []);
@@ -22,4 +23,4 @@ export const ToolsEditor = ({ state, setState }: Props) => {
       className={styles.editor}
     />
   );
-};
+});

@@ -6,8 +6,9 @@ import classNames from 'classnames';
 import { Tools } from '../Tools/Tools';
 import { graphql } from 'gql';
 import { useQuery, gql, useLazyQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
+import { Suspense, useEffect, useState } from 'react';
+import { Result } from '../Result/Result';
+import { parseString } from 'helpers/parseString';
 
 const tempQuery = `
 query AllCharacters {
@@ -21,10 +22,11 @@ query AllCharacters {
 `;
 
 export const Panel = () => {
+  console.log('Panel rendered');
   const [query, setQuery] = useState(tempQuery);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
-  const [getData, { loading, data, error }] = useLazyQuery(gql(tempQuery));
+  const [executeQuery, { loading, data, error }] = useLazyQuery(gql(tempQuery));
   const props = {
     variables,
     headers,
@@ -33,14 +35,18 @@ export const Panel = () => {
   };
 
   function handleClick() {
-    let tempVariables;
-    try {
-      tempVariables = JSON.parse(variables);
-    } catch (e) {
-      tempVariables = '';
-    }
+    const tempVariables = parseString(variables);
+    const tempHeaders = parseString(headers);
     console.log('test', variables);
-    getData({ query: gql(query), variables: tempVariables });
+    executeQuery({
+      query: gql(query),
+      variables: tempVariables,
+      context: {
+        headers: {
+          tempHeaders,
+        },
+      },
+    });
   }
 
   return (
@@ -58,15 +64,8 @@ export const Panel = () => {
           </Button>
         </div>
         <Tools {...props} />
-        <div className={classNames(styles.toolsEditor, { [styles.hideToolsEditor]: true })}></div>
       </div>
-      <div className={styles.result}>
-        <CodeMirror
-          className={styles.resultCode}
-          value={JSON.stringify(error ? error : data, null, ' ')}
-          editable={false}
-        />
-      </div>
+      <Result value={error ? error : data} loading={loading} />
     </div>
   );
 };
