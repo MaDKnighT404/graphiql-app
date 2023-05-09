@@ -3,12 +3,14 @@ import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
 import { Editor } from 'components/GraphQlPage/Editor/Editor';
 import { ReactComponent as Play } from '@/shared/assets/icons/play.svg';
 import classNames from 'classnames';
+import { getIntrospectionQuery, buildClientSchema, printSchema } from 'graphql';
 import { Tools } from '../Tools/Tools';
-import { graphql } from 'gql';
 import { useQuery, gql, useLazyQuery } from '@apollo/client';
 import { Suspense, useEffect, useState } from 'react';
 import { Result } from '../Result/Result';
-import { parseString } from 'helpers/parseString';
+import { parseString } from 'helpers';
+import { fetcher } from 'helpers';
+import { Voyager, voyagerIntrospectionQuery } from 'graphql-voyager';
 
 const tempQuery = `
 query AllCharacters {
@@ -20,6 +22,15 @@ query AllCharacters {
   }
 }
 `;
+const buildSchemaFromData = async () => {
+  // const introspectionQuery = getIntrospectionQuery();
+  const tempData = await fetcher(voyagerIntrospectionQuery);
+  // console.log('tempData', tempData.data);
+  // const schema = buildClientSchema(tempData.data);
+  // console.log('schema', schema);
+  return tempData;
+  // console.log('sdl schema', printSchema(schema));F
+};
 
 export const Panel = () => {
   console.log('Panel rendered');
@@ -27,6 +38,8 @@ export const Panel = () => {
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
   const [executeQuery, { loading, data, error }] = useLazyQuery(gql(tempQuery));
+  const [docVisible, setDocVisible] = useState(true);
+
   const props = {
     variables,
     headers,
@@ -49,6 +62,12 @@ export const Panel = () => {
     });
   }
 
+  useEffect(() => {
+    if (data) {
+      buildSchemaFromData();
+    }
+  }, [data]);
+
   return (
     <div className={styles.panel}>
       <div className={styles.session}>
@@ -66,6 +85,17 @@ export const Panel = () => {
         <Tools {...props} />
       </div>
       <Result value={error ? error : data} loading={loading} />
+      {/* <div className={classNames({ [styles.docsVisible]: docVisible }, styles.docs)}>
+        <Button
+          className={styles.schemaBtn}
+          size={ButtonSize.M}
+          theme={ButtonTheme.OUTLINE}
+          onClick={() => setDocVisible((prev) => !prev)}
+        >
+          Schema
+        </Button>
+        <Voyager introspection={buildSchemaFromData} />
+      </div> */}
     </div>
   );
 };

@@ -6,11 +6,12 @@ import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
 import { bracketMatching, syntaxHighlighting } from '@codemirror/language';
 import { history } from '@codemirror/commands';
 import classNames from 'classnames';
-import { graphql, updateSchema } from 'cm6-graphql';
+import { getSchema, graphql, updateSchema } from 'cm6-graphql';
 import CodeMirror from '@uiw/react-codemirror';
-import { GraphQLSchema, buildSchema } from 'graphql';
+import { GraphQLSchema, buildClientSchema, buildSchema, getIntrospectionQuery } from 'graphql';
 import { buildHTTPExecutor } from '@graphql-tools/executor-http';
 import { schemaFromExecutor } from '@graphql-tools/wrap';
+import { fetcher } from '../../../helpers';
 
 type Props = {
   query: string;
@@ -39,6 +40,15 @@ export const Editor = memo(function Editor({ query, setQuery }: Props) {
       setMyGraphQLSchema(postsSubschema.schema);
     };
     fetchSchema();
+    // const buildSchemaFromdata = async () => {
+    //   const introspectionQuery = getIntrospectionQuery();
+    //   const tempData = await fetcher(introspectionQuery);
+    //   console.log('tempData', tempData.data);
+    //   const schema = buildClientSchema(tempData.data);
+    //   console.log('schema', schema);
+    //   setMyGraphQLSchema(schema);
+    // };
+    // buildSchemaFromdata();
   }, []);
 
   //   const schema = buildSchema(`

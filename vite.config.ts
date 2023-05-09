@@ -37,4 +37,7 @@ export default defineConfig({
     // since parsing CSS is slow
     css: false,
   },
+  optimizeDeps: {
+    exclude: ['js-big-decimal'],
+  },
 });
