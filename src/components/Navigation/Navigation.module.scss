@@ -1,5 +1,5 @@
 .navigation {
-  padding: 20px;
+  padding: 20px 10px;
 
   .navigationContainer {
     max-width: 1600px;
@@ -10,9 +10,13 @@
     .navigationLinkWrapper {
       display: flex;
       gap: 10px;
-      padding: 10px;
-      border: 1px solid gray;
-      border-radius: 15px;
+      padding: 10px 15px;
+      border-radius: 10px;
+
+      box-shadow: 
+      -10px -10px 10px rgba(255, 255, 255, 0.5),
+      10px 10px 10px rgba(70, 70, 70, 0.33);
+
 
       .navigationLink {
         padding: 5px 10px;

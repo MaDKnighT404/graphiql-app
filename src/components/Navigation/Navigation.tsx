@@ -37,16 +37,16 @@ export const Navigation = () => {
             </Link>
 
             <Link to="signup" className={styles.navigationLink} onClick={handleSignUp}>
-            {t('Sign up')}
+              {t('Sign up')}
             </Link>
           </div>
         ) : (
           <div className={styles.navigationLinkWrapper}>
             <Link to="/graphql" className={styles.navigationLink}>
-              Go to the Main Page
+              {t('Go to the Main Page')}
             </Link>
             <button onClick={handleLogout} className={styles.navigationLink}>
-              Logout
+              {t('Logout')}
             </button>
           </div>
         )}

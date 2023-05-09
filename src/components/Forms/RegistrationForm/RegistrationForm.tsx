@@ -56,7 +56,7 @@ export const RegistrationModal = () => {
 
   return (
     <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={styles.formTitle}>{t('Registration')}</h4>
+      <h4 className={styles.formTitle}>{t('Registration form')}</h4>
 
       <label htmlFor="name" className={styles.formLabel}>
         {t('Fullname')}

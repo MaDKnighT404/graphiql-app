@@ -61,7 +61,7 @@ export const LoginModal = () => {
 
   return (
     <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={styles.formTitle}>{t('Login')}</h4>
+      <h4 className={styles.formTitle}>{t('Login form')}</h4>
 
       <label htmlFor="email" className={styles.formLabel}>
         {t('Email')}
@@ -82,7 +82,7 @@ export const LoginModal = () => {
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
 
       <button type="submit" className={styles.formSubmitBtn}>
-        {t('Log in')}
+        {t('Login in account')}
       </button>
 
       <button onClick={handleGoogleLogin} type="button" className={styles.formSubmitBtn}>
