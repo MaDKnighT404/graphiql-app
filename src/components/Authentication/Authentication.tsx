@@ -14,6 +14,7 @@ export const Authentication = () => {
   const dispatch = useAppDispatch();
   const { ...state } = useAppSelector(selectAuthValues);
   const { t } = useTranslation();
+
   const handleChangeForm = () => {
     dispatch(changeAuthenticationForm());
     dispatch(setError(''));

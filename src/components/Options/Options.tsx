@@ -14,11 +14,6 @@ export const Options = () => {
   const { theme, toggleTheme } = useTheme();
   const [user] = useAuthState(auth);
 
-  const handleLogout = async () => {
-    dispatch(setError(''));
-    await signOut(auth);
-  };
-
   const toggleLang = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
   };
@@ -33,7 +28,6 @@ export const Options = () => {
         className={theme === Theme.DARK ? styles.darkMode : styles.lightMode}
         onClick={toggleTheme}
       />
-      {user && <button onClick={handleLogout} className={styles.logout} />}
     </div>
   );
 };

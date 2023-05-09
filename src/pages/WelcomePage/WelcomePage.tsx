@@ -12,11 +12,11 @@ export const WelcomePage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (user) {
-      navigate('/graphql');
-    }
-  }, [user, loading, navigate]);
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate('/graphql');
+  //   }
+  // }, [user, loading, navigate]);
 
   return (
     <>
@@ -31,7 +31,7 @@ export const WelcomePage = () => {
               {t('To start')}
             </p>
           </div>
-          <Authentication />
+          {/* <Authentication /> */}
         </section>
       ) : (
         <Loader />

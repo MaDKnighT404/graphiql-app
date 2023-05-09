@@ -1,9 +1,8 @@
 .header {
-  flex: 0 0 auto;
-  padding: 0 20px;
-  background: var(--header-bg-color);
   position: sticky;
   top: 0;
+  padding: 0 20px;
+  background: var(--header-bg-color);
 
   .headerContainer {
     max-width: 1600px;
