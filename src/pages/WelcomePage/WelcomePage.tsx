@@ -1,20 +1,17 @@
 import { useEffect } from 'react';
-import { Authentication } from 'components/Authentication/Authentication';
 import { useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'firebase/firebase';
-import styles from './WelcomePage.module.scss';
 import { Loader } from 'components/Loader/Loader';
+import { useTranslation } from 'react-i18next';
+import styles from './WelcomePage.module.scss';
 
 export const WelcomePage = () => {
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
-    }
     if (user) {
       navigate('/graphql');
     }
@@ -24,7 +21,16 @@ export const WelcomePage = () => {
     <>
       {!loading ? (
         <section className={styles.welcome}>
-          <Authentication />
+          <h1 className={styles.welcomeHeader}>{t('Welcome')}</h1>
+          <div className={styles.welcomeTextWrapper}>
+            <p>
+              {t('GraphQl is')}
+              <br />
+              <br />
+              {t('To start')}
+            </p>
+          </div>
+          {/* <Authentication /> */}
         </section>
       ) : (
         <Loader />

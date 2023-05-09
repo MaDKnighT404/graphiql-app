@@ -1,3 +1,37 @@
 .welcome {
-  color: var(--red-dark-color);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  animation-name: textAppear;
+  animation-duration: 0.75s;
+  
+  .welcomeHeader {
+    width: 100%;
+    text-align: center;
+    margin: 50px 0 70px;
+    line-height: 40px;
+    @media (max-width: 768px) {
+      margin: 30px 0 40px;
+    }
+  }
+
+  .welcomeTextWrapper {
+    max-width: 600px;
+    font-size: 18px;
+    line-height: 28px;
+    margin-bottom: 25px;
+
+  }
+}
+
+@keyframes textAppear {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0.2;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
 }

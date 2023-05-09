@@ -7,18 +7,36 @@
   "Reload page": "Reload page",
   "Submit": "Submit",
 
-  "Fullname": "Fullname",
+  "Go to the Main Page": "Go to the Main Page",
+  "Logout": "Logout",
+
+  "Login form": "Login form",
+  "Registration form": "Registration form",
+
+  "Fullname": "Fullname:",
   "Email": "Email:",
   "Password": "Password:",
   "Registration": "Registration",
-  "Login": "Login",
+  "Login in account": "Login in account",
   "Already have an account?": "Already have an account?",
   "Don't have an account?": "Don't have an account?",
   "Create account": "Create account",
   "Sign in": "Sign in",
   "Sign up": "Sign up",
   "Log in": "Login",
-  "Logout": "Logout",
   "Login with Google": "Login with Google",
-  "Login with Github": "Login with Github"
+  "Login with Github": "Login with Github",
+  "Hello": "Hello",
+
+  "Name and surname": "Name and surname. First letter of each word must be capitalized",
+
+  "User not found": "User not found",
+  "Wrong password": "Wrong password",
+  "This user already exist": "This user already exists",
+
+  "Welcome": "Welcome to the GraphiQl application!",
+  "GraphQl is": "GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.",
+  "To start": "To start using the application you must fill out the registration form or authorization if you are already register.",
+
+  "Team": "Team Resolvers:"
 }

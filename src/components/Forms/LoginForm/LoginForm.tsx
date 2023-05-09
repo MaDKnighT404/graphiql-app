@@ -1,32 +1,32 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignIn } from 'helpers/validationSchema';
-import { logInWithEmailAndPassword } from 'firebase/firebase';
+import { auth, signInWithGithub, signInWithGoogle } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
-import styles from '../Authentication.module.scss';
-
-interface formProps {
-  handleGoogleLogin: () => void;
-  handleGithubLogin: () => void;
-  handleChangeForm: () => void;
-}
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useAppDispatch } from 'redux/hooks';
+import { setError } from 'redux/features/auth/authenticationSlice';
+import styles from '../Forms.module.scss';
 
 interface LoginFormValues {
   email: string;
   password: string;
 }
 
-export const LoginModal: React.FC<formProps> = ({
-  handleGoogleLogin,
-  handleGithubLogin,
-  handleChangeForm,
-}) => {
+export const LoginModal = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle();
+  };
+
+  const handleGithubLogin = () => {
+    signInWithGithub();
+  };
 
   const {
     register,
@@ -44,8 +44,16 @@ export const LoginModal: React.FC<formProps> = ({
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
 
-    await logInWithEmailAndPassword(data.email, data.password);
-    navigate('/graphql');
+    await signInWithEmailAndPassword(auth, data.email, data.password).catch((err) => {
+      dispatch(setError(''));
+      setTimeout(() => {
+        if (err.code === 'auth/user-not-found') {
+          dispatch(setError('User not found'));
+        } else if (err.code === 'auth/wrong-password') {
+          dispatch(setError('Wrong password'));
+        }
+      });
+    });
 
     reset();
     setLoading(false);
@@ -53,22 +61,28 @@ export const LoginModal: React.FC<formProps> = ({
 
   return (
     <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={styles.formTitle}>{t('Sign in')}</h4>
+      <h4 className={styles.formTitle}>{t('Login form')}</h4>
 
       <label htmlFor="email" className={styles.formLabel}>
         {t('Email')}
-        <input type="text" {...register('email')} id="email" />
+        <input type="text" {...register('email')} id="email" className={styles.formInput} />
       </label>
       {errors.email && <p className={styles.formError}>{errors.email.message}</p>}
 
       <label htmlFor="password" className={styles.formLabel}>
         {t('Password')}
-        <input type="password" {...register('password')} id="password" />
+        <input
+          type="password"
+          {...register('password')}
+          id="password"
+          className={styles.formInput}
+          autoComplete="current-password"
+        />
       </label>
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
 
       <button type="submit" className={styles.formSubmitBtn}>
-        {t('Log in')}
+        {t('Login in account')}
       </button>
 
       <button onClick={handleGoogleLogin} type="button" className={styles.formSubmitBtn}>
@@ -79,12 +93,6 @@ export const LoginModal: React.FC<formProps> = ({
         {t('Login with Github')}
       </button>
 
-      <p className={styles.formMessage}>
-        {t("Don't have an account?")}
-        <span onClick={handleChangeForm} className={styles.formSignIn}>
-          {t('Sign up')}
-        </span>
-      </p>
       {loading && <Loader />}
     </form>
   );

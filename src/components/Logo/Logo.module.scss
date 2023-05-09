@@ -1,0 +1,15 @@
+.logo {
+  width: 160px;
+  height: 80px;
+  background: url('../../shared/assets/images/graphql_logo_text.svg') no-repeat;
+
+  @media (max-width: 639px) {
+    width: 0;
+    // position: relative;
+    // top:-25px;
+    // left: -15px;
+    // width: 35px;
+    // height: 35px;
+    // background: url('../../shared/assets/images/graphql_logo.svg') no-repeat;
+  }
+}

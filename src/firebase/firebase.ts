@@ -74,23 +74,19 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
 };
 
 const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, 'users'), {
-      uid: user.uid,
-      name,
-      authProvider: 'local',
-      email,
-    });
+  const res = await createUserWithEmailAndPassword(auth, email, password);
+  const user = res.user;
+  await addDoc(collection(db, 'users'), {
+    uid: user.uid,
+    name,
+    authProvider: 'local',
+    email,
+  });
 
-    updateProfile(user, {
-      displayName: name,
-      photoURL: 'https://example.com/123',
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  await updateProfile(user, {
+    displayName: name,
+    photoURL: 'https://example.com/123',
+  });
 };
 
 export {

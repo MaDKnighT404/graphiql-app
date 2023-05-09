@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { FieldValues, useForm } from 'react-hook-form';
 import { validationSchemaSignUp } from 'helpers/validationSchema';
-import { logInWithEmailAndPassword, registerWithEmailAndPassword } from 'firebase/firebase';
+import { registerWithEmailAndPassword } from 'firebase/firebase';
 import { Loader } from 'components/Loader/Loader';
-import styles from '../Authentication.module.scss';
+import { useAppDispatch } from 'redux/hooks';
+import { setError, setUserName } from 'redux/features/auth/authenticationSlice';
+import styles from '../Forms.module.scss';
 
 interface RegistrationFormValue {
   name: string;
@@ -14,20 +15,10 @@ interface RegistrationFormValue {
   password: string;
 }
 
-interface FormProps {
-  handleGoogleLogin: () => void;
-  handleGithubLogin: () => void;
-  handleChangeForm: () => void;
-}
-
-export const RegistrationModal: React.FC<FormProps> = ({
-  handleGoogleLogin,
-  handleGithubLogin,
-  handleChangeForm,
-}) => {
+export const RegistrationModal = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -45,36 +36,55 @@ export const RegistrationModal: React.FC<FormProps> = ({
 
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
-    try {
-      await registerWithEmailAndPassword(data.name, data.email, data.password);
-      await logInWithEmailAndPassword(data.email, data.password);
-      navigate('/graphql');
-    } catch (err) {
-      console.error(err);
-    }
+
+    await registerWithEmailAndPassword(data.name, data.email, data.password)
+      .then(() => {
+        dispatch(setUserName(data.name));
+      })
+      .catch((err) => {
+        dispatch(setError(''));
+        setTimeout(() => {
+          if (err.code === 'auth/email-already-in-use') {
+            dispatch(setError('This user already exist'));
+          }
+        });
+      });
+
     reset();
     setLoading(false);
   };
 
   return (
     <form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
-      <h4 className={styles.formTitle}>{t('Sign up')}</h4>
+      <h4 className={styles.formTitle}>{t('Registration form')}</h4>
 
       <label htmlFor="name" className={styles.formLabel}>
         {t('Fullname')}
-        <input type="text" {...register('name')} id="name" />
+        <input
+          type="text"
+          {...register('name')}
+          id="name"
+          className={styles.formInput}
+          title={t('Name and surname') || undefined}
+        />
       </label>
       {errors.name && <p className={styles.formError}>{errors.name.message}</p>}
 
       <label htmlFor="email" className={styles.formLabel}>
         {t('Email')}
-        <input type="text" {...register('email')} id="email" />
+        <input type="text" {...register('email')} id="email" className={styles.formInput} />
       </label>
       {errors.email && <p className={styles.formError}>{errors.email.message}</p>}
 
       <label htmlFor="password" className={styles.formLabel}>
         {t('Password')}
-        <input type="password" {...register('password')} id="password" />
+        <input
+          type="password"
+          {...register('password')}
+          id="password"
+          className={styles.formInput}
+          autoComplete="current-password"
+        />
       </label>
       {errors.password && <p className={styles.formError}>{errors.password.message}</p>}
 
@@ -82,20 +92,6 @@ export const RegistrationModal: React.FC<FormProps> = ({
         {t('Create account')}
       </button>
 
-      <button onClick={handleGoogleLogin} type="button" className={styles.formSubmitBtn}>
-        {t('Login with Google')}
-      </button>
-
-      <button onClick={handleGithubLogin} type="button" className={styles.formSubmitBtn}>
-        {t('Login with Github')}
-      </button>
-
-      <p className={styles.formMessage}>
-        {t('Already have an account?')}
-        <span onClick={handleChangeForm} className={styles.formSignIn}>
-          {t('Sign in')}
-        </span>
-      </p>
       {loading && <Loader />}
     </form>
   );

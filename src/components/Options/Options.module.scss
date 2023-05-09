@@ -1,0 +1,66 @@
+.options {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.engFlag,
+.rusFlag,
+.lightMode,
+.darkMode,
+.logout
+{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.15s ease-in;
+}
+
+.engFlag {
+  background: url(../../shared/assets/images/eng_flag.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.rusFlag {
+  background: url(../../shared/assets/images/rus_flag.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.lightMode {
+  background: url(../../shared/assets/images/icon-sun.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.darkMode {
+  background: url(../../shared/assets/images/icon-moon.svg) no-repeat;
+  background-size: 100% 100%;
+}
+
+.logout {
+  background: url(../../shared/assets/images/logout.svg) no-repeat;
+  background-size: 100% 100%;
+  color: #3237d4;
+}
+
+// .userLogoutBtn {
+//   width: 30px;
+//   height: 30px;
+//   margin: 0 auto;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background-position: center;
+//   border: 1px solid transparent;
+//   border-radius: 50%;
+//   background-color: var(--inverted-primary-color);
+//   cursor: pointer;
+
+//   .logoutIcon {
+//     fill: var(--primary-color);
+//   }
+// }

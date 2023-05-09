@@ -2,17 +2,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store/store';
 
 interface AuthValues {
-  name?: string;
+  name?: string | null;
   email: string;
   password: string;
-  isReg: boolean;
+  form: string;
+  error?: string;
 }
 
 const initialState: AuthValues = {
   name: '',
   email: '',
   password: '',
-  isReg: false,
+  form: 'signIn',
+  error: '',
 };
 
 interface UpdateAuthValuesPayload {
@@ -28,12 +30,18 @@ const authSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value as never;
     },
-    changeAuthenticationForm: (state: AuthValues) => {
-      state.isReg = !state.isReg;
+    chooseForm: (state: AuthValues, action: PayloadAction<string>) => {
+      state.form = action.payload;
+    },
+    setError: (state: AuthValues, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+    setUserName: (state: AuthValues, action: PayloadAction<string>) => {
+      state.name = action.payload;
     },
   },
 });
 
-export const { updateAuthValue, changeAuthenticationForm } = authSlice.actions;
+export const { updateAuthValue, chooseForm, setError, setUserName } = authSlice.actions;
 export const selectAuthValues = (state: RootState) => state.auth;
 export const authReducer = authSlice.reducer;
