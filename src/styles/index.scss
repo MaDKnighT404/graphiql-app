@@ -6,8 +6,8 @@
 @import 'themes/light';
 @import 'themes/dark';
 
-
-body, html {
+body,
+html {
   font-family: Inter, sans-serif, ui-sans-serif, system-ui, -apple-system, Arial;
   height: 100%;
 }
@@ -33,12 +33,16 @@ body, html {
 }
 
 .main {
+  overflow: scroll;
   height: 100%;
-  min-height: 0;
+  margin-top: 30px;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 section {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 20px
+  padding: 0 20px;
 }

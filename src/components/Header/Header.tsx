@@ -2,6 +2,7 @@ import { Logo } from 'components/Logo';
 import { Options } from 'components/Options';
 import { User } from 'components/User';
 import styles from './Header.module.scss';
+import { Navigation } from 'components/Navigation';
 
 export const Header: React.FC = () => {
   return (
@@ -9,7 +10,10 @@ export const Header: React.FC = () => {
       <div className={styles.headerContainer}>
         <Logo />
         <User />
-        <Options />
+        <div className={styles.headerSubContainer}>
+          <Options />
+          <Navigation />
+        </div>
       </div>
     </header>
   );

@@ -9,11 +9,15 @@ import { Navigation } from './Navigation';
 
 export const App = () => {
   const { theme } = useTheme();
+
+  const handleStikyScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    console.log(event);
+  };
+
   return (
     <div className={classNames('app', theme)}>
       <Header />
-      <Navigation />
-      <main className="main">
+      <main className="main" onScroll={handleStikyScroll}>
         <AppRouter />
       </main>
       <Footer />

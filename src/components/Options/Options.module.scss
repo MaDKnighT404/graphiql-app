@@ -1,7 +1,9 @@
 .options {
   display: flex;
-  gap: 10px;
   justify-content: space-between;
+  align-self: center;
+  width: 80px;
+  gap: 10px;
   border: 1px solid gray;
   border-radius: 15px;
   padding: 5px;
@@ -11,8 +13,7 @@
 .rusFlag,
 .lightMode,
 .darkMode,
-.logout
-{
+.logout {
   width: 30px;
   height: 30px;
   border-radius: 50%;
