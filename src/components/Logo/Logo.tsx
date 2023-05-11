@@ -1,5 +1,9 @@
 import styles from './Logo.module.scss';
 
-export const Logo = () => {
-  return <div className={styles.logo}></div>;
+interface LogoProps {
+  scrollTop: number;
+}
+
+export const Logo: React.FC<LogoProps> = ({ scrollTop }) => {
+  return <div className={`${styles.logo} ${scrollTop && styles.logoAnimated}`}></div>;
 };

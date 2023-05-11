@@ -2,14 +2,13 @@
   width: 200px;
   height: 100px;
   background: url('../../shared/assets/images/graphql_logo_text.svg') no-repeat;
+  transition: 0.2s ease-in;
+}
 
-  @media (max-width: 639px) {
-    width: 0;
-    // position: relative;
-    // top:-25px;
-    // left: -15px;
-    // width: 35px;
-    // height: 35px;
-    // background: url('../../shared/assets/images/graphql_logo.svg') no-repeat;
-  }
+.logoAnimated {
+  transform: translate(-250px);
+  transition: 0.2s ease-in;
+  width: 0;
+
+  visibility: hidden;
 }
