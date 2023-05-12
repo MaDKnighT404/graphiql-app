@@ -21,11 +21,11 @@ export const Header: React.FC = () => {
 
   return (
     <header className={`${styles.header} ${scrollTop && styles.headerAnimated}`}>
-      <div className={styles.headerContainer}>
+      <div className={`${styles.headerContainer} ${scrollTop && styles.headerContainerAnimated}`}>
         <Logo scrollTop={scrollTop} />
         <User scrollTop={scrollTop} />
         <div className={styles.headerSubContainer}>
-          <Options />
+          <Options scrollTop={scrollTop} />
           <Navigation />
         </div>
       </div>

@@ -1,7 +1,8 @@
 .header {
   display: flex;
   align-items: center;
-  min-height: 10vh;
+  min-height: 100px;
+  height: 10vh;
   position: sticky;
   top: 0;
   padding: 0 15px;
@@ -20,7 +21,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: 0.2s ease-in;
   }
 
   .headerSubContainer {
@@ -32,5 +32,11 @@
 
 .headerAnimated {
   background-color: var(--header-animated-bg-color);
-  transition: 0.2s ease-in;
+  
+  min-height: 80px;
+
+  .headerContainerAnimated {
+    justify-content: center;
+  }
 }
+

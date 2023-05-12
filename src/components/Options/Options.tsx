@@ -1,25 +1,21 @@
 import { Theme, useTheme } from 'app/providers/ThemeProvider';
 import { useTranslation } from 'react-i18next';
-import { signOut } from 'firebase/auth';
-import { auth } from 'firebase/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useAppDispatch } from 'redux/hooks';
-import { setError } from 'redux/features/auth/authenticationSlice';
 import styles from './Options.module.scss';
 
-export const Options = () => {
-  const dispatch = useAppDispatch();
+interface OptionsProps {
+  scrollTop: number;
+}
 
+export const Options: React.FC<OptionsProps> = ({ scrollTop }) => {
   const { i18n } = useTranslation();
   const { theme, toggleTheme } = useTheme();
-  const [user] = useAuthState(auth);
 
   const toggleLang = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en');
   };
 
   return (
-    <div className={styles.options}>
+    <div className={`${styles.options} ${scrollTop && styles.optionsAnimated}`}>
       <button
         className={i18n.language === 'en' ? styles.engFlag : styles.rusFlag}
         onClick={toggleLang}

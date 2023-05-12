@@ -3,12 +3,25 @@
   height: 100px;
   background: url('../../shared/assets/images/graphql_logo_text.svg') no-repeat;
   transition: 0.2s ease-in;
+
+  @media (max-width: 639px) {
+    width: 0;
+  }
 }
 
 .logoAnimated {
-  transform: translate(-250px);
-  transition: 0.2s ease-in;
-  width: 0;
+  animation: logoAnim 0.8s forwards;
+}
 
-  visibility: hidden;
+@keyframes logoAnim {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 }
