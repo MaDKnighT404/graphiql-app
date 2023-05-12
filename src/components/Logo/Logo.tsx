@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './Logo.module.scss';
 
 interface LogoProps {
@@ -5,5 +6,15 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ scrollTop }) => {
-  return <div className={`${styles.logo} ${scrollTop && styles.logoAnimated}`}></div>;
+  const navigate = useNavigate();
+  const handleLogoClick = () => {
+    navigate('/graphql');
+  };
+
+  return (
+    <div
+      className={`${styles.logo} ${scrollTop && styles.logoAnimated}`}
+      onClick={handleLogoClick}
+    ></div>
+  );
 };
