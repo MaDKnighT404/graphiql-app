@@ -12,7 +12,7 @@
   transition: 0.2s ease-in;
 
   @media (max-width: 768px) {
-    padding: 0 20px;
+    padding: 0 10px;
   }
 
   .headerContainer {
@@ -25,6 +25,10 @@
     @media (max-width: 639px) {
       justify-content: center;
       gap: 15px;
+    }
+
+    @media (max-width: 468px) {
+      gap: 0px;
     }
   }
 
