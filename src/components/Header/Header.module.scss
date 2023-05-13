@@ -12,7 +12,7 @@
   transition: 0.2s ease-in;
 
   @media (max-width: 768px) {
-    padding: 0 5px;
+    padding: 0 20px;
   }
 
   .headerContainer {
@@ -21,6 +21,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 639px) {
+      justify-content: center;
+      gap: 15px;
+    }
   }
 
   .headerSubContainer {
@@ -32,11 +37,9 @@
 
 .headerAnimated {
   background-color: var(--header-animated-bg-color);
-  
   min-height: 80px;
 
   .headerContainerAnimated {
     justify-content: center;
   }
 }
-
