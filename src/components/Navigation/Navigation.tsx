@@ -28,29 +28,27 @@ export const Navigation = () => {
   };
 
   return (
-    <div className={styles.navigation}>
-      <div className={styles.navigationContainer}>
-        {!user ? (
-          <div className={styles.navigationLinkWrapper}>
-            <Link to="signin" className={styles.navigationLink} onClick={handleSignIn}>
-              {t('Sign in')}
-            </Link>
+    <>
+      {!user ? (
+        <div className={styles.navigationLinkWrapper}>
+          <Link to="signin" className={styles.navigationLink} onClick={handleSignIn}>
+            {t('Sign in')}
+          </Link>
 
-            <Link to="signup" className={styles.navigationLink} onClick={handleSignUp}>
-              {t('Sign up')}
-            </Link>
-          </div>
-        ) : (
-          <div className={styles.navigationLinkWrapper}>
-            <Link to="/graphql" className={styles.navigationLink}>
-              {t('Go to the Main Page')}
-            </Link>
-            <button onClick={handleLogout} className={styles.navigationLink}>
-              {t('Logout')}
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+          <Link to="signup" className={styles.navigationLink} onClick={handleSignUp}>
+            {t('Sign up')}
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.navigationLinkWrapper}>
+          <Link to="/graphql" className={styles.navigationLink}>
+            {t('Main Page')}
+          </Link>
+          <button onClick={handleLogout} className={styles.navigationLink}>
+            {t('Logout')}
+          </button>
+        </div>
+      )}
+    </>
   );
 };

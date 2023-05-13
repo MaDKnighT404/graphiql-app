@@ -7,9 +7,9 @@ import { selectAuthValues } from 'redux/features/auth/authenticationSlice';
 import { useAppSelector } from 'redux/hooks';
 import { RegistrationModal } from 'components/Forms/RegistrationForm/RegistrationForm';
 import { LoginModal } from 'components/Forms/LoginForm/LoginForm';
-import styles from './Auth.module.scss';
+import styles from './AuthPage.module.scss';
 
-export const Auth = () => {
+export const AuthPage = () => {
   const [user, loading] = useAuthState(auth);
   const { ...state } = useAppSelector(selectAuthValues);
   const navigate = useNavigate();

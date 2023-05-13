@@ -3,10 +3,14 @@ import { auth } from 'firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAppSelector } from 'redux/hooks';
 import { selectAuthValues } from 'redux/features/auth/authenticationSlice';
-import styles from './User.module.scss';
 import { useEffect } from 'react';
+import styles from './User.module.scss';
 
-export const User = () => {
+interface UserProps {
+  scrollTop: number;
+}
+
+export const User: React.FC<UserProps> = ({ scrollTop }) => {
   const { ...state } = useAppSelector(selectAuthValues);
   const userName = useAuthState(auth)[0]?.displayName as string;
   const { t } = useTranslation();
@@ -18,7 +22,7 @@ export const User = () => {
   return (
     <>
       {userName && (
-        <div className={styles.userWrapper}>
+        <div className={`${styles.userWrapper} ${scrollTop && styles.userWrapperAnimated}`}>
           <h5 className={styles.userTitle}>{t('Hello')}</h5>
           <div className={styles.user}>
             <span className={styles.userName}>{userName}</span>
