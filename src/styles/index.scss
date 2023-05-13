@@ -6,39 +6,33 @@
 @import 'themes/light';
 @import 'themes/dark';
 
-
-body, html {
+body,
+html {
   font-family: Inter, sans-serif, ui-sans-serif, system-ui, -apple-system, Arial;
   height: 100%;
 }
 
 #root {
   display: flex;
-  min-height: 100%;
   justify-content: center;
-  height: 100%;
   margin: 0;
-  width: 100%;
 }
 
 .app {
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
-
   color: var(--primary-color);
   background: var(--bg-color);
   font: var(--font-m);
 }
 
 .main {
-  height: 100%;
-  min-height: 0;
+  min-height: 85vh;
 }
 
 section {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 20px
+  padding: 0 20px;
 }

@@ -1,15 +1,27 @@
 .logo {
-  width: 160px;
-  height: 80px;
+  width: 200px;
+  height: 100px;
   background: url('../../shared/assets/images/graphql_logo_text.svg') no-repeat;
+  transition: 0.2s ease-in;
 
   @media (max-width: 639px) {
     width: 0;
-    // position: relative;
-    // top:-25px;
-    // left: -15px;
-    // width: 35px;
-    // height: 35px;
-    // background: url('../../shared/assets/images/graphql_logo.svg') no-repeat;
+  }
+}
+
+.logoAnimated {
+  animation: logoAnim 0.8s forwards;
+}
+
+@keyframes logoAnim {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+    width: 0;
+    height: 0;
   }
 }

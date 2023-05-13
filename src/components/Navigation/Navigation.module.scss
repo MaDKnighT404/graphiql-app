@@ -1,36 +1,19 @@
-.navigation {
-  padding: 20px 10px;
+.navigationLinkWrapper {
+  display: flex;
+  gap: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
 
-  .navigationContainer {
-    max-width: 1600px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: end;
-
-    .navigationLinkWrapper {
-      display: flex;
-      gap: 10px;
-      padding: 10px 15px;
-      border-radius: 10px;
-
-      box-shadow: 
-      -10px -10px 10px rgba(255, 255, 255, 0.5),
-      10px 10px 10px rgba(70, 70, 70, 0.33);
-
-
-      .navigationLink {
-        padding: 5px 10px;
-        border-radius: 10px;
-        background-color: var(--form-button-bg-color);
-        border: 1px solid var(--form-button-border-color);
-        transition: 0.2s ease-in;
-        text-decoration: none;
-        cursor: pointer;
-
-        &:hover {
-          background-color: var(--form-button-bg-hover-color);
-        }
-      }
+  .navigationLink {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: var(--form-button-bg-color);
+    border: 1px solid var(--form-button-border-color);
+    transition: 0.2s ease-in;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--form-button-bg-hover-color);
     }
   }
 }
