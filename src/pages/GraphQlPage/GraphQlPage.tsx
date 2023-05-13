@@ -30,11 +30,11 @@ export const GraphQlPage = () => {
     <ApolloProvider client={client}>
       <section className={styles.graphql}>
         <div className={styles.sessions}>
-          <div className={styles.header}>
+          {/* <div className={styles.header}>
             <div>
               <div>tab</div>
             </div>
-          </div>
+          </div> */}
           <Panel />
         </div>
       </section>

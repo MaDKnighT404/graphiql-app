@@ -33,7 +33,6 @@ export const Tools = memo(function Tools(props: Props) {
         <div className={styles.tabs}>
           <Button
             onClick={() => setActiveTab(Active.Variables)}
-            size={ButtonSize.M}
             theme={ButtonTheme.OUTLINE}
             className={classNames(stylesBtn.btn, {
               [styles.activeTab]: visible && activeTab === Active.Variables,
@@ -43,7 +42,6 @@ export const Tools = memo(function Tools(props: Props) {
           </Button>
           <Button
             onClick={() => setActiveTab(Active.Headers)}
-            size={ButtonSize.M}
             theme={ButtonTheme.OUTLINE}
             className={classNames(stylesBtn.btn, {
               [styles.activeTab]: visible && activeTab === Active.Headers,
