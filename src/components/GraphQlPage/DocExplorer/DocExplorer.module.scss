@@ -1,0 +1,35 @@
+.docs {
+  position: absolute;
+  padding: 5px;
+
+
+  .graphQlExplorer {
+    display: flex;
+    flex-direction: row;
+
+
+
+    .header {
+
+    }
+
+    .content {
+
+    }
+  }
+}
+
+.docsVisible{
+  // width: 300px;
+  left: 40px;
+  background: white;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.docsInvisible {
+ height: 0;
+ width: 0;
+ left: -1000px;
+}
