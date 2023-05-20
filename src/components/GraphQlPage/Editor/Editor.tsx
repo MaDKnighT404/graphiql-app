@@ -11,7 +11,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { GraphQLSchema, buildClientSchema, buildSchema, getIntrospectionQuery } from 'graphql';
 import { buildHTTPExecutor } from '@graphql-tools/executor-http';
 import { schemaFromExecutor } from '@graphql-tools/wrap';
-import { fetcher } from '../../../helpers';
+// import { fetchSchema } from '../../../helpers';
 
 type Props = {
   query: string;
@@ -20,44 +20,19 @@ type Props = {
 
 export const Editor = memo(function Editor({ query, setQuery }: Props) {
   console.log('editor rendered');
-  const url = 'https://rickandmortyapi.com/graphql';
-  const [myGraphQLSchema, setMyGraphQLSchema] = useState<GraphQLSchema>();
 
-  useEffect(() => {
-    const fetchSchema = async () => {
-      const remoteExecutor = buildHTTPExecutor({
-        endpoint: url,
-      });
+  // const [myGraphQLSchema, setMyGraphQLSchema] = useState<GraphQLSchema>();
 
-      const postsSubschema = {
-        schema: await schemaFromExecutor(remoteExecutor),
-        executor: remoteExecutor,
-      };
+  // useEffect(() => {
+  //   const executeFetch = async () => {
+  //     const scheme = await fetchSchema();
+  //     console.log('schema', scheme);
+  //     setMyGraphQLSchema(scheme);
+  //   };
+  //   executeFetch();
+  // }, []);
 
-      const fields = postsSubschema.schema.getQueryType()?.getFields();
-      const result = JSON.parse(JSON.stringify(fields));
-      console.log('result', result);
-      setMyGraphQLSchema(postsSubschema.schema);
-    };
-    fetchSchema();
-    // const buildSchemaFromdata = async () => {
-    //   const introspectionQuery = getIntrospectionQuery();
-    //   const tempData = await fetcher(introspectionQuery);
-    //   console.log('tempData', tempData.data);
-    //   const schema = buildClientSchema(tempData.data);
-    //   console.log('schema', schema);
-    //   setMyGraphQLSchema(schema);
-    // };
-    // buildSchemaFromdata();
-  }, []);
-
-  //   const schema = buildSchema(`
-  //   type Query {
-  //     id: ID!
-  //     hello: String
-  //   }
-  // `);
-  console.log(myGraphQLSchema);
+  // console.log(myGraphQLSchema);
   // console.log('schema', schema);
   return (
     <CodeMirror
@@ -69,15 +44,16 @@ export const Editor = memo(function Editor({ query, setQuery }: Props) {
         history(),
         autocompletion(),
         lineNumbers(),
+        // syntaxHighlighting(),
         // graphql(schema),
-        graphql(myGraphQLSchema, {
-          onShowInDocs(field, type, parentType) {
-            alert(`Showing in docs.: Field: ${field}, Type: ${type}, ParentType: ${parentType}`);
-          },
-          onFillAllFields(view, schema, _query, cursor, token) {
-            alert(`Filling all fields. Token: ${token}`);
-          },
-        }),
+        // graphql(myGraphQLSchema, {
+        //   onShowInDocs(field, type, parentType) {
+        //     alert(`Showing in docs.: Field: ${field}, Type: ${type}, ParentType: ${parentType}`);
+        //   },
+        //   onFillAllFields(view, schema, _query, cursor, token) {
+        //     alert(`Filling all fields. Token: ${token}`);
+        //   },
+        // }),
       ]}
       onChange={setQuery}
     />
