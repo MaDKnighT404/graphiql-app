@@ -1,0 +1,21 @@
+.nav{
+
+  .back:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.header {
+  .name{
+    color: red;
+  }
+  .argName{
+    color: blue;
+
+  }
+
+  .argReturn{
+    color: green
+  }
+}

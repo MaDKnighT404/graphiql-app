@@ -1,36 +1,54 @@
-import { GraphQLField, GraphQLObjectType, isListType, isObjectType } from 'graphql';
+import {
+  isListType,
+  isObjectType,
+  isInputObjectType,
+  GraphQLType,
+  isNonNullType,
+  isNamedType,
+} from 'graphql';
 import styles from './Type.module.scss';
-import { Item } from '../Item/Item';
 import { Fields } from '../Fields/Fields';
+import { ExplorerField, NavigationItem } from '../NavContext';
 
 type Props = {
-  value: GraphQLField<unknown, unknown>;
+  graph: ExplorerField;
 };
 
-export const Type = ({ value }: Props) => {
-  console.log('type', value);
+function getType(type: GraphQLType): ExplorerField {
+  if (isNonNullType(type) || isListType(type)) {
+    return getType(type.ofType);
+  }
+  return type;
+}
+
+export const Type = ({ graph }: Props) => {
+  const value = graph;
+
+  const type = !isNamedType(value) ? getType(value.type) : value;
+
   return (
     <div>
-      <div className={styles.name}>
-        {`${value.name}(`}
-        {value.args.map((el) => (
-          <div key={el.name}>
-            <span>{el.name}:</span> <span>{el.type.toString()}</span>
-          </div>
-        ))}
-        {`): ${value.type.toString()}`}
+      <div className={styles.header}>
+        <span className={styles.name}>{`${value.name}`}</span>
+        {!isNamedType(value) && value.args && value.args.length > 0 ? (
+          <>
+            {'('}
+            <Fields fieldsMap={value.args} />
+            {')'}
+          </>
+        ) : null}
+        {!isNamedType(value) ? `: ${value.type.toString()}` : null}
       </div>
       <div className={styles.description}>
         <p>{value.description}</p>
       </div>
-      <div>Type details</div>
+      <div>{type.name} details</div>
       <div className={styles.fields}>
-        {isObjectType(value.type) ? (
-          <Fields fieldsMap={value.type.getFields()} isFunc={false} />
-        ) : null}
-
-        {/* isObjectType(value.type)?
-      // Object.values(value.type.getFields()).map() */}
+        {isObjectType(type) || isInputObjectType(type) ? (
+          <Fields fieldsMap={type.getFields()} isFunc={false} />
+        ) : (
+          <div> {type.description}</div>
+        )}
       </div>
     </div>
   );

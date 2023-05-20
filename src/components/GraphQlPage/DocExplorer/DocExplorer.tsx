@@ -1,85 +1,41 @@
 import classnames from 'classnames';
 import styles from './DocExplorer.module.scss';
-import { fetchSchema } from 'helpers';
-import { useCallback, useEffect, useState } from 'react';
-import {
-  GraphQLSchema,
-  printSchema,
-  isType,
-  GraphQLFieldMap,
-  GraphQLField,
-  GraphQLObjectType,
-  GraphQLArgument,
-  GraphQLInputField,
-  GraphQLNamedType,
-} from 'graphql';
-import { Item } from './Item/Item';
+import { useContext } from 'react';
+import { GraphQLSchema, GraphQLField, GraphQLNamedType } from 'graphql';
 import { Type } from './Type/Type';
-import { Fields } from './Fields/Fields';
+import { Schema } from './Schema/Schema';
+import { DocHeader } from './DocHeader/DocHeader';
+import { NavContext } from './NavContext';
 
 type Props = {
   docsOpen: boolean;
   schema: GraphQLSchema | undefined;
 };
 
-export type ExplorerField =
-  | GraphQLField<unknown, unknown, unknown>
-  | GraphQLInputField
-  | GraphQLArgument
-  | GraphQLNamedType;
-
-export type NavigationItem = {
-  name: string;
-  graph?: ExplorerField;
-};
-const initial: NavigationItem = { name: 'Docs' };
-
 export const DocExplorer = ({ docsOpen, schema }: Props) => {
-  const [fieldsMap, setFieldsMap] = useState<GraphQLFieldMap<unknown, unknown>>();
-  const [current, setCurrent] = useState<GraphQLField<unknown, unknown, unknown>>();
-  const [navStack, setNavStack] = useState<NavigationItem[]>([initial]);
-
-  const pushItem = useCallback((item: NavigationItem) => {
-    setNavStack((prev) => {
-      const lastItem = prev.at(-1)!;
-      return lastItem.graph === item.graph ? prev : [...prev, item];
-    });
-  }, []);
-
-  const popItem = useCallback(() => {
-    setNavStack((prev) => (prev.length > 1 ? prev.slice(0, -1) : prev));
-  }, []);
-
-  useEffect(() => {
-    if (schema) {
-      const fieldsMap = schema?.getQueryType()?.getFields();
-      setFieldsMap(fieldsMap);
-    }
-  }, [schema]);
-  if (!schema) return <div>No schema</div>;
-
-  const onClick = () => {
-
+  const context = useContext(NavContext);
+  if (!context) {
+    throw new Error('There is no navigation');
   }
-
+  const { lastGraph } = context;
   return (
-    <div
-      className={classnames(
-        styles.docs,
-        { [styles.docsVisible]: docsOpen },
-        { [styles.docsInvisible]: !docsOpen }
-      )}
-    >
-      <div className={styles.graphQlExplorer}>
-        {/* <div className={styles.header}>{header}</div> */}
-        <div className={styles.content}>
-          <div>
-            <div className={styles.explorerTitle}>query: {schema?.getQueryType()?.name}</div>
-            <Fields fieldsMap={fieldsMap} setCurrent={setCurrent} isFunc={true} />
+    <NavContext.Provider value={context}>
+      <div
+        className={classnames(
+          styles.docs,
+          { [styles.docsVisible]: docsOpen },
+          { [styles.docsInvisible]: !docsOpen }
+        )}
+      >
+        {schema ? (
+          <div className={styles.graphQlExplorer}>
+            <DocHeader />
+            {lastGraph ? <Type graph={lastGraph} /> : <Schema schema={schema} />}
           </div>
-        </div>
-        {current ? <Type value={current} /> : null}
+        ) : (
+          <div>No schema</div>
+        )}
       </div>
-    </div>
+    </NavContext.Provider>
   );
 };

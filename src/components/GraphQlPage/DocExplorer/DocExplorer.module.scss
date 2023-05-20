@@ -1,21 +1,15 @@
 .docs {
-  position: absolute;
+  // position: absolute;
   padding: 5px;
+  width:300px;
+  border-radius: 5px;
+  overflow-x: auto;
+  scroll-behavior: auto;
 
 
   .graphQlExplorer {
     display: flex;
-    flex-direction: row;
-
-
-
-    .header {
-
-    }
-
-    .content {
-
-    }
+    flex-direction: column;
   }
 }
 
@@ -29,6 +23,7 @@
 }
 
 .docsInvisible {
+  position: absolute;
  height: 0;
  width: 0;
  left: -1000px;
