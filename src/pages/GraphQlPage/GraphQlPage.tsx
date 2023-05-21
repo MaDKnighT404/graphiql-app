@@ -1,41 +1,47 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { auth } from 'firebase/firebase';
 import styles from './GraphQlPage.module.scss';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { Panel } from 'components/GraphQlPage/Panel/Panel';
 import { Button } from '../../components/Button/Button';
 import { ReactComponent as DocIcon } from '@/shared/assets/icons/doc.svg';
+import { ReactComponent as Reload } from '@/shared/assets/icons/reload.svg';
 import { DocExplorer } from '../../components/GraphQlPage/DocExplorer/DocExplorer';
 import { fetchSchema } from 'helpers';
 import { GraphQLSchema } from 'graphql';
 import { NavigationProvider } from '../../components/GraphQlPage/DocExplorer/NavContext';
+import classNames from 'classnames';
 
+const initUrl = 'https://rickandmortyapi.com/graphql';
 const client = new ApolloClient({
-  uri: 'https://rickandmortyapi.com/graphql',
+  uri: initUrl,
   cache: new InMemoryCache(),
 });
 
 export const GraphQlPage = () => {
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [user, loading] = useAuthState(auth);
+  const [url, setUrl] = useState(initUrl);
+  const [reloading, setReloading] = useState(false);
   const navigate = useNavigate();
   const [docsOpen, setDocsOpen] = useState(false);
 
-  useEffect(() => {
-    const buildSchemaFromData = async () => {
-      const schema = await fetchSchema();
-      // console.log('schema', schema);
-      // console.log('schema', schema?.getQueryType());
-      // console.log('test', schema?.getQueryType()?.getFields());
-      setSchema(schema);
+  const buildSchemaFromData = useCallback(async () => {
+    setReloading(() => true);
+    const schema = await fetchSchema(url);
+    setSchema(schema);
+    setReloading(() => false);
+  }, [url]);
 
-      // console.log('types', schema.getTypeMap());
-      // console.log('type', schema.getDirective('charactersByIds'));
-    };
+  useEffect(() => {
     buildSchemaFromData();
-  }, []);
+  }, [buildSchemaFromData]);
+
+  const refetchSchema = () => {
+    buildSchemaFromData();
+  };
 
   useEffect(() => {
     if (loading) {
@@ -54,18 +60,16 @@ export const GraphQlPage = () => {
           <Button title="Show documentation Explorer" onClick={() => setDocsOpen((prev) => !prev)}>
             <DocIcon />
           </Button>
+          <Button title="Refetch  Grapgh shema" onClick={() => refetchSchema()}>
+            <Reload className={classNames({ [styles.rotateEffect]: reloading })} />
+          </Button>
         </div>
         <NavigationProvider>
           <DocExplorer docsOpen={docsOpen} schema={schema} />
         </NavigationProvider>
 
         <div className={styles.sessions}>
-          {/* <div className={styles.header}>
-            <div>
-              <div>tab</div>
-            </div>
-          </div> */}
-          <Panel />
+          <Panel schema={schema} />
         </div>
       </section>
     </ApolloProvider>

@@ -46,7 +46,6 @@
     "graphql": "^16.6.0",
     "graphql-request": "^6.0.0",
     "graphql-tools": "^8.3.20",
-    "graphql-voyager": "^1.2.0",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.0",

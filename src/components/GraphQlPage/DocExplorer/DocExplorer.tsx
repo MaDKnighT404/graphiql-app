@@ -9,7 +9,7 @@ import { NavContext } from './NavContext';
 
 type Props = {
   docsOpen: boolean;
-  schema: GraphQLSchema | undefined;
+  schema?: GraphQLSchema;
 };
 
 export const DocExplorer = ({ docsOpen, schema }: Props) => {

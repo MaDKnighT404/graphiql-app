@@ -9,6 +9,11 @@
   padding: 10px 0;
   max-height: 85vh;
 
+  .sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
 }
 
@@ -32,4 +37,17 @@
   display: flex;
   justify-content: start;
   padding: 5px;
+}
+
+.rotateEffect {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

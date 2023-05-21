@@ -4,38 +4,43 @@ import { Dispatch, SetStateAction, memo, useEffect, useRef, useState } from 'rea
 import { EditorView, keymap, lineNumbers } from '@codemirror/view';
 import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
 import { bracketMatching, syntaxHighlighting } from '@codemirror/language';
+import { oneDarkHighlightStyle, oneDark } from '@codemirror/theme-one-dark';
 import { history } from '@codemirror/commands';
 import classNames from 'classnames';
 import { getSchema, graphql, updateSchema } from 'cm6-graphql';
-import CodeMirror from '@uiw/react-codemirror';
-import { GraphQLSchema, buildClientSchema, buildSchema, getIntrospectionQuery } from 'graphql';
-import { buildHTTPExecutor } from '@graphql-tools/executor-http';
-import { schemaFromExecutor } from '@graphql-tools/wrap';
-// import { fetchSchema } from '../../../helpers';
+import CodeMirror, { ReactCodeMirrorRef, useCodeMirror } from '@uiw/react-codemirror';
+import { GraphQLSchema } from 'graphql';
+import { EditorState } from '@codemirror/state';
 
 type Props = {
   query: string;
   setQuery: Dispatch<SetStateAction<string>>;
+  schema?: GraphQLSchema;
 };
 
-export const Editor = memo(function Editor({ query, setQuery }: Props) {
+export const Editor = memo(function Editor({ query, setQuery, schema }: Props) {
   console.log('editor rendered');
-
-  // const [myGraphQLSchema, setMyGraphQLSchema] = useState<GraphQLSchema>();
-
-  // useEffect(() => {
-  //   const executeFetch = async () => {
-  //     const scheme = await fetchSchema();
-  //     console.log('schema', scheme);
-  //     setMyGraphQLSchema(scheme);
-  //   };
-  //   executeFetch();
-  // }, []);
+  const editor = useRef<ReactCodeMirrorRef>(null);
 
   // console.log(myGraphQLSchema);
-  // console.log('schema', schema);
+  // console.log('schema', isSchema(schema));
+  // console.log('schema editor', schema);
+  // console.log('schema view', editor.current?.view);
+
+  useEffect(() => {
+    const onNewSchema = (schema: GraphQLSchema) => {
+      if (editor.current && editor.current.view) {
+        console.log('update');
+        updateSchema(editor.current.view, schema);
+      }
+    };
+    if (schema) {
+      onNewSchema(schema);
+    }
+  }, [schema]);
   return (
     <CodeMirror
+      ref={editor}
       value={query}
       className={classNames(styles.editor)}
       extensions={[
@@ -44,16 +49,15 @@ export const Editor = memo(function Editor({ query, setQuery }: Props) {
         history(),
         autocompletion(),
         lineNumbers(),
-        // syntaxHighlighting(),
-        // graphql(schema),
-        // graphql(myGraphQLSchema, {
-        //   onShowInDocs(field, type, parentType) {
-        //     alert(`Showing in docs.: Field: ${field}, Type: ${type}, ParentType: ${parentType}`);
-        //   },
-        //   onFillAllFields(view, schema, _query, cursor, token) {
-        //     alert(`Filling all fields. Token: ${token}`);
-        //   },
-        // }),
+        syntaxHighlighting(oneDarkHighlightStyle),
+        graphql(schema, {
+          onShowInDocs(field, type, parentType) {
+            alert(`Showing in docs.: Field: ${field}, Type: ${type}, ParentType: ${parentType}`);
+          },
+          onFillAllFields(view, schema, _query, cursor, token) {
+            alert(`Filling all fields. Token: ${token}`);
+          },
+        }),
       ]}
       onChange={setQuery}
     />

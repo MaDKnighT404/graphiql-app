@@ -5,9 +5,10 @@ import { ReactComponent as Play } from '@/shared/assets/icons/play.svg';
 import classNames from 'classnames';
 import { Tools } from '../Tools/Tools';
 import { useQuery, gql, useLazyQuery } from '@apollo/client';
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, memo, useCallback, useEffect, useState } from 'react';
 import { Result } from '../Result/Result';
 import { parseString } from 'helpers';
+import { GraphQLSchema } from 'graphql';
 
 const tempQuery = `
 query AllCharacters {
@@ -20,17 +21,11 @@ query AllCharacters {
 }
 `;
 
-// type Props = {
-//   docsOpen: boolean;
-// };
+type Props = {
+  schema?: GraphQLSchema;
+};
 
-// const buildSchemaFromData = async () => {
-//   const schema = await fetchSchema();
-//   console.log('schema', schema);
-//   return schema;
-// };
-
-export const Panel = () => {
+export const Panel = memo(({ schema }: Props) => {
   console.log('Panel rendered');
   const [query, setQuery] = useState(tempQuery);
   const [variables, setVariables] = useState('');
@@ -47,7 +42,7 @@ export const Panel = () => {
   const handleClick = useCallback(() => {
     const tempVariables = parseString(variables);
     const tempHeaders = parseString(headers);
-    console.log('test', variables);
+    console.log('variables', variables);
     executeQuery({
       query: gql(query),
       variables: tempVariables,
@@ -63,9 +58,9 @@ export const Panel = () => {
     <div className={styles.panel}>
       <div className={styles.session}>
         <div className={styles.queryEditor}>
-          <Editor query={query} setQuery={setQuery} />
+          <Editor query={query} setQuery={setQuery} schema={schema} />
           <Button
-            onClick={handleClick}
+            onClick={() => handleClick()}
             size={ButtonSize.M}
             theme={ButtonTheme.OUTLINE}
             className={styles.btn}
@@ -78,4 +73,4 @@ export const Panel = () => {
       <Result value={error ? error : data} loading={loading} />
     </div>
   );
-};
+});
