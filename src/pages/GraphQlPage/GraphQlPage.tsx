@@ -13,6 +13,7 @@ import { fetchSchema } from 'helpers';
 import { GraphQLSchema } from 'graphql';
 import { NavigationProvider } from '../../components/GraphQlPage/DocExplorer/NavContext';
 import classNames from 'classnames';
+import { ToastContainer, toast } from 'react-toastify';
 
 const initUrl = 'https://rickandmortyapi.com/graphql';
 const client = new ApolloClient({

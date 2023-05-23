@@ -9,6 +9,7 @@ import { Suspense, memo, useCallback, useEffect, useState } from 'react';
 import { Result } from '../Result/Result';
 import { parseString } from 'helpers';
 import { GraphQLSchema } from 'graphql';
+import { ToastContainer, toast } from 'react-toastify';
 
 const tempQuery = `
 query AllCharacters {
@@ -39,6 +40,19 @@ export const Panel = memo(({ schema }: Props) => {
     setHeaders,
   };
 
+  useEffect(() => {
+    if (data && !error) {
+      toast.success('Data loaded');
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error('🦄 Something went wrong', {
+        position: 'top-right',
+      });
+    }
+  }, [error]);
   const handleClick = useCallback(() => {
     const tempVariables = parseString(variables);
     const tempHeaders = parseString(headers);
