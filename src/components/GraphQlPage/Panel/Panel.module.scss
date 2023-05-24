@@ -8,15 +8,12 @@
   min-height: 0;
   // overflow: hidden;
 
-  .docs {
-
-  }
 
   .session {
     display: flex;
     flex: 1 1 0%;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--editor-color);
     border-radius: 10px;
     overflow: hidden;
     max-height: 100%;

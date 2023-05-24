@@ -9,7 +9,7 @@ import { Suspense, memo, useCallback, useEffect, useState } from 'react';
 import { Result } from '../Result/Result';
 import { parseString } from 'helpers';
 import { GraphQLSchema } from 'graphql';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
 const tempQuery = `

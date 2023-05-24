@@ -33,9 +33,10 @@ export const Tools = memo(function Tools(props: Props) {
       <div className={styles.toolsHeader}>
         <div className={styles.tabs}>
           <Button
-            onClick={() => setActiveTab(Active.Variables)}
-            size={ButtonSize.M}
-            theme={ButtonTheme.OUTLINE}
+            onClick={() => {
+              !visible ? openClose() : null;
+              setActiveTab(Active.Variables);
+            }}
             className={classNames(stylesBtn.btn, {
               [styles.activeTab]: visible && activeTab === Active.Variables,
             })}
@@ -43,9 +44,10 @@ export const Tools = memo(function Tools(props: Props) {
             {t('Variables')}
           </Button>
           <Button
-            onClick={() => setActiveTab(Active.Headers)}
-            size={ButtonSize.M}
-            theme={ButtonTheme.OUTLINE}
+            onClick={() => {
+              !visible ? openClose() : null;
+              setActiveTab(Active.Headers);
+            }}
             className={classNames(stylesBtn.btn, {
               [styles.activeTab]: visible && activeTab === Active.Headers,
             })}
@@ -53,12 +55,7 @@ export const Tools = memo(function Tools(props: Props) {
             {t('Headers')}
           </Button>
         </div>
-        <Button
-          onClick={openClose}
-          size={ButtonSize.M}
-          theme={ButtonTheme.OUTLINE}
-          className={stylesBtn.btn}
-        >
+        <Button onClick={openClose} className={stylesBtn.btn}>
           ^
         </Button>
       </div>
