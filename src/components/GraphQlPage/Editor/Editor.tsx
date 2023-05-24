@@ -22,15 +22,9 @@ export const Editor = memo(function Editor({ query, setQuery, schema }: Props) {
   console.log('editor rendered');
   const editor = useRef<ReactCodeMirrorRef>(null);
 
-  // console.log(myGraphQLSchema);
-  // console.log('schema', isSchema(schema));
-  // console.log('schema editor', schema);
-  // console.log('schema view', editor.current?.view);
-
   useEffect(() => {
     const onNewSchema = (schema: GraphQLSchema) => {
       if (editor.current && editor.current.view) {
-        console.log('update');
         updateSchema(editor.current.view, schema);
       }
     };

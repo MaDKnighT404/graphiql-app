@@ -6,13 +6,10 @@
   "ErrorBoundary has caught an Unexpected Error": "ErrorBoundary has caught an Unexpected Error",
   "Reload page": "Reload page",
   "Submit": "Submit",
-
   "Main Page": "Main Page",
   "Logout": "Logout",
-
   "Login form": "Login form",
   "Registration form": "Registration form",
-
   "Fullname": "Fullname:",
   "Email": "Email:",
   "Password": "Password:",
@@ -27,16 +24,23 @@
   "Login with Google": "Login with Google",
   "Login with Github": "Login with Github",
   "Hello": "Hello",
-
   "Name and surname": "Name and surname. First letter of each word must be capitalized",
-
   "User not found": "User not found",
   "Wrong password": "Wrong password",
   "This user already exist": "This user already exists",
-
   "Welcome": "Welcome to the GraphiQl application!",
   "GraphQl is": "GraphQL is a query language for APIs and a runtime for fulfilling those queries with your existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.",
   "To start": "To start using the application you must fill out the registration form or authorization if you are already register.",
-
-  "Team": "Team Resolvers:"
+  "Team": "Team Resolvers:",
+  "Re-fetch GraphQL schema": "Re-fetch GraphQL schema",
+  "Show documentation Explorer": "Show documentation Explorer",
+  "Variables": "Variables",
+  "Headers": "Headers",
+  "Docs": "Docs",
+  "Schema description": "A GraphQL schema provides all kind of operation.",
+  "query": "query",
+  "mutation": "mutation",
+  "Data loaded": "Data loaded",
+  "Something went wrong": "Something went wrong",
+  "Syntax error": "Syntax error"
 }

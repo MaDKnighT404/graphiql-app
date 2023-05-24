@@ -13,7 +13,7 @@ import { fetchSchema } from 'helpers';
 import { GraphQLSchema } from 'graphql';
 import { NavigationProvider } from '../../components/GraphQlPage/DocExplorer/NavContext';
 import classNames from 'classnames';
-import { ToastContainer, toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const initUrl = 'https://rickandmortyapi.com/graphql';
 const client = new ApolloClient({
@@ -22,6 +22,7 @@ const client = new ApolloClient({
 });
 
 export const GraphQlPage = () => {
+  const { t } = useTranslation();
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [user, loading] = useAuthState(auth);
   const [url, setUrl] = useState(initUrl);
@@ -58,10 +59,18 @@ export const GraphQlPage = () => {
     <ApolloProvider client={client}>
       <section className={styles.graphql}>
         <div className={styles.sidebar}>
-          <Button title="Show documentation Explorer" onClick={() => setDocsOpen((prev) => !prev)}>
+          <Button
+            title={t('Show documentation Explorer')!}
+            className={styles.btn}
+            onClick={() => setDocsOpen((prev) => !prev)}
+          >
             <DocIcon />
           </Button>
-          <Button title="Refetch  Grapgh shema" onClick={() => refetchSchema()}>
+          <Button
+            title={t('Re-fetch GraphQL schema')!}
+            className={styles.btn}
+            onClick={() => refetchSchema()}
+          >
             <Reload className={classNames({ [styles.rotateEffect]: reloading })} />
           </Button>
         </div>

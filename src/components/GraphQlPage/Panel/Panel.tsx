@@ -10,6 +10,7 @@ import { Result } from '../Result/Result';
 import { parseString } from 'helpers';
 import { GraphQLSchema } from 'graphql';
 import { ToastContainer, toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const tempQuery = `
 query AllCharacters {
@@ -27,7 +28,7 @@ type Props = {
 };
 
 export const Panel = memo(({ schema }: Props) => {
-  console.log('Panel rendered');
+  const { t } = useTranslation();
   const [query, setQuery] = useState(tempQuery);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
@@ -41,32 +42,31 @@ export const Panel = memo(({ schema }: Props) => {
   };
 
   useEffect(() => {
-    if (data && !error) {
-      toast.success('Data loaded');
+    console.log('test');
+    if (error && !loading) {
+      toast.error(t('Something went wrong'));
+    } else if (!loading && data && !error) {
+      toast.success(t('Data loaded'));
     }
-  }, [data]);
+  }, [data, error, loading, t]);
 
-  useEffect(() => {
-    if (error) {
-      toast.error('🦄 Something went wrong', {
-        position: 'top-right',
-      });
-    }
-  }, [error]);
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback(async () => {
     const tempVariables = parseString(variables);
     const tempHeaders = parseString(headers);
-    console.log('variables', variables);
-    executeQuery({
-      query: gql(query),
-      variables: tempVariables,
-      context: {
-        headers: {
-          tempHeaders,
+    try {
+      await executeQuery({
+        query: gql(query),
+        variables: tempVariables,
+        context: {
+          headers: {
+            tempHeaders,
+          },
         },
-      },
-    });
-  }, [executeQuery, headers, query, variables]);
+      });
+    } catch (e) {
+      toast.error(t('Syntax error'));
+    }
+  }, [executeQuery, headers, query, variables, t]);
 
   return (
     <div className={styles.panel}>

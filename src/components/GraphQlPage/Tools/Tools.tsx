@@ -4,6 +4,7 @@ import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
 import { Dispatch, SetStateAction, memo, useState } from 'react';
 import classNames from 'classnames';
 import { ToolsEditor } from './ToolsEditor/ToolsEditor';
+import { useTranslation } from 'react-i18next';
 
 enum Active {
   Headers = 'Headers',
@@ -19,11 +20,11 @@ type Props = {
 };
 
 export const Tools = memo(function Tools(props: Props) {
-  console.log('Tools rendered');
+  const { t } = useTranslation();
+
   const [visible, visibleActive] = useState(false);
   const [activeTab, setActiveTab] = useState<Active>(Active.Variables);
   const openClose = () => {
-    const currentState = visible;
     visibleActive((value) => !value);
   };
 
@@ -39,7 +40,7 @@ export const Tools = memo(function Tools(props: Props) {
               [styles.activeTab]: visible && activeTab === Active.Variables,
             })}
           >
-            Variables
+            {t('Variables')}
           </Button>
           <Button
             onClick={() => setActiveTab(Active.Headers)}
@@ -49,7 +50,7 @@ export const Tools = memo(function Tools(props: Props) {
               [styles.activeTab]: visible && activeTab === Active.Headers,
             })}
           >
-            Headers
+            {t('Headers')}
           </Button>
         </div>
         <Button
