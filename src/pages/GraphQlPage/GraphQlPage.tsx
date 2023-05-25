@@ -6,14 +6,14 @@ import styles from './GraphQlPage.module.scss';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { Panel } from 'components/GraphQlPage/Panel/Panel';
 import { Button } from '../../components/Button/Button';
-import { ReactComponent as DocIcon } from '@/shared/assets/icons/doc.svg';
-import { ReactComponent as Reload } from '@/shared/assets/icons/reload.svg';
+// import { ReactComponent as DocIcon } from '@/shared/assets/icons/doc.svg';
+// import { ReactComponent as Reload } from '@/shared/assets/icons/reload.svg';
 import { DocExplorer } from '../../components/GraphQlPage/DocExplorer/DocExplorer';
 import { fetchSchema } from 'helpers';
 import { GraphQLSchema } from 'graphql';
 import { NavigationProvider } from '../../components/GraphQlPage/DocExplorer/NavContext';
 import classNames from 'classnames';
-import { useTranslation } from 'react-i18next';
+import { Sidebar } from '../../components/GraphQlPage/Sidebar/Sidebar';
 
 const initUrl = 'https://rickandmortyapi.com/graphql';
 const client = new ApolloClient({
@@ -22,13 +22,12 @@ const client = new ApolloClient({
 });
 
 export const GraphQlPage = () => {
-  const { t } = useTranslation();
   const [schema, setSchema] = useState<GraphQLSchema>();
   const [user, loading] = useAuthState(auth);
   const [url, setUrl] = useState(initUrl);
-  const [reloading, setReloading] = useState(false);
   const navigate = useNavigate();
   const [docsOpen, setDocsOpen] = useState(false);
+  const [reloading, setReloading] = useState(false);
 
   const buildSchemaFromData = useCallback(async () => {
     setReloading(() => true);
@@ -40,10 +39,6 @@ export const GraphQlPage = () => {
   useEffect(() => {
     buildSchemaFromData();
   }, [buildSchemaFromData]);
-
-  const refetchSchema = () => {
-    buildSchemaFromData();
-  };
 
   useEffect(() => {
     if (loading) {
@@ -58,7 +53,12 @@ export const GraphQlPage = () => {
   return (
     <ApolloProvider client={client}>
       <section className={styles.graphql}>
-        <div className={styles.sidebar}>
+        <Sidebar
+          setDocsOpen={setDocsOpen}
+          reloading={reloading}
+          buildSchemaFromData={buildSchemaFromData}
+        />
+        {/* <div className={styles.sidebar}>
           <Button
             title={t('Show documentation Explorer')!}
             className={styles.btn}
@@ -73,7 +73,7 @@ export const GraphQlPage = () => {
           >
             <Reload className={classNames({ [styles.rotateEffect]: reloading })} />
           </Button>
-        </div>
+        </div> */}
         <NavigationProvider>
           <DocExplorer docsOpen={docsOpen} schema={schema} />
         </NavigationProvider>

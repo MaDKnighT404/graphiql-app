@@ -1,12 +1,12 @@
 .app_dark_theme {
-  --bg-color: #0946ed;
+  --bg-color: rgba(7,7,16,.7);
 
-  --header-bg-color: #0e0e64;
-  --header-animated-bg-color: #154771;
+  --header-bg-color: rgb(8, 8, 105, 0.7);
+  --header-animated-bg-color: rgb(14, 14, 100, .7);
 
-  --footer-bg-color: #080869;
+  --footer-bg-color: rgb(8, 8, 105, 0.7);
 
-  --form-bg-color: #175488;
+  --form-bg-color: rgb(8, 8, 105, 0.7);
   --form-button-bg-color: #2178c0;
   --form-button-bg-hover-color: #2ea1ff;
   --form-button-border-color: #288ee2;
