@@ -48,7 +48,7 @@ export const Panel = memo(({ schema }: Props) => {
     } else if (!loading && data && !error) {
       toast.success(t('Data loaded'));
     }
-  }, [data, error, loading, t]);
+  }, [data, error, loading]);
 
   const handleClick = useCallback(async () => {
     const tempVariables = parseString(variables);
