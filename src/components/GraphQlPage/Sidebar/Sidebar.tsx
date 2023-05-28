@@ -17,8 +17,7 @@ export const Sidebar = ({ setDocsOpen, reloading, buildSchemaFromData }: Props) 
 
   const refetchSchema = useCallback(() => {
     buildSchemaFromData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [buildSchemaFromData]);
 
   return (
     <div className={styles.sidebar}>
