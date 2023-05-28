@@ -11,10 +11,7 @@ i18n
   .init({
     fallbackLng: 'en',
     lng: 'en',
-    debug: /* __IS_DEV__ */ true,
-    /*     react: {
-        useSuspense: false
-        }, */
+    debug: /* __IS_DEV__ */ false,
     interpolation: {
       escapeValue: false,
     },
