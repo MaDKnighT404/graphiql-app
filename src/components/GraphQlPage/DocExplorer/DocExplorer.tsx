@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import styles from './DocExplorer.module.scss';
 import { useContext } from 'react';
-import { GraphQLSchema, GraphQLField, GraphQLNamedType } from 'graphql';
+import { GraphQLSchema } from 'graphql';
 import { Type } from './Type/Type';
 import { Schema } from './Schema/Schema';
 import { DocHeader } from './DocHeader/DocHeader';
@@ -9,7 +9,7 @@ import { NavContext } from './NavContext';
 
 type Props = {
   docsOpen: boolean;
-  schema: GraphQLSchema | undefined;
+  schema?: GraphQLSchema;
 };
 
 export const DocExplorer = ({ docsOpen, schema }: Props) => {

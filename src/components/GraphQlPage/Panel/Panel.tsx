@@ -5,9 +5,12 @@ import { ReactComponent as Play } from '@/shared/assets/icons/play.svg';
 import classNames from 'classnames';
 import { Tools } from '../Tools/Tools';
 import { useQuery, gql, useLazyQuery } from '@apollo/client';
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, memo, useCallback, useEffect, useState } from 'react';
 import { Result } from '../Result/Result';
 import { parseString } from 'helpers';
+import { GraphQLSchema } from 'graphql';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const tempQuery = `
 query AllCharacters {
@@ -20,18 +23,12 @@ query AllCharacters {
 }
 `;
 
-// type Props = {
-//   docsOpen: boolean;
-// };
+type Props = {
+  schema?: GraphQLSchema;
+};
 
-// const buildSchemaFromData = async () => {
-//   const schema = await fetchSchema();
-//   console.log('schema', schema);
-//   return schema;
-// };
-
-export const Panel = () => {
-  console.log('Panel rendered');
+export const Panel = memo(({ schema }: Props) => {
+  const { t } = useTranslation();
   const [query, setQuery] = useState(tempQuery);
   const [variables, setVariables] = useState('');
   const [headers, setHeaders] = useState('');
@@ -44,28 +41,40 @@ export const Panel = () => {
     setHeaders,
   };
 
-  const handleClick = useCallback(() => {
+  useEffect(() => {
+    console.log('test');
+    if (error && !loading) {
+      toast.error(t('Something went wrong'));
+    } else if (!loading && data && !error) {
+      toast.success(t('Data loaded'));
+    }
+  }, [data, error, loading]);
+
+  const handleClick = useCallback(async () => {
     const tempVariables = parseString(variables);
     const tempHeaders = parseString(headers);
-    console.log('test', variables);
-    executeQuery({
-      query: gql(query),
-      variables: tempVariables,
-      context: {
-        headers: {
-          tempHeaders,
+    try {
+      await executeQuery({
+        query: gql(query),
+        variables: tempVariables,
+        context: {
+          headers: {
+            tempHeaders,
+          },
         },
-      },
-    });
-  }, [executeQuery, headers, query, variables]);
+      });
+    } catch (e) {
+      toast.error(t('Syntax error'));
+    }
+  }, [executeQuery, headers, query, variables, t]);
 
   return (
     <div className={styles.panel}>
       <div className={styles.session}>
         <div className={styles.queryEditor}>
-          <Editor query={query} setQuery={setQuery} />
+          <Editor query={query} setQuery={setQuery} schema={schema} />
           <Button
-            onClick={handleClick}
+            onClick={() => handleClick()}
             size={ButtonSize.M}
             theme={ButtonTheme.OUTLINE}
             className={styles.btn}
@@ -78,4 +87,4 @@ export const Panel = () => {
       <Result value={error ? error : data} loading={loading} />
     </div>
   );
-};
+});

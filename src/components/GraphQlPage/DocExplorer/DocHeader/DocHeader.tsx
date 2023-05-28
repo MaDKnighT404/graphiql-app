@@ -2,19 +2,15 @@ import { useContext } from 'react';
 import { NavContext } from '../NavContext';
 import styles from './DocHeader.module.scss';
 import { ReactComponent as BackIcon } from '@/shared/assets/icons/back.svg';
-
-// type Props = {
-//   navStack: NavigationItem[];
-//   popItem: () => void;
-// };
+import { useTranslation } from 'react-i18next';
 
 export const DocHeader = () => {
+  const { t } = useTranslation();
   const context = useContext(NavContext);
   if (!context) {
     throw new Error('There is no navigation');
   }
   const { popItem, navStack } = context;
-
   return (
     <>
       {navStack.length > 1 ? (
@@ -25,7 +21,7 @@ export const DocHeader = () => {
           </div>
         </div>
       ) : (
-        <div className={styles.header}>{navStack.at(-1)?.name}</div>
+        <div className={styles.header}>{t('Docs')}</div>
       )}
     </>
   );

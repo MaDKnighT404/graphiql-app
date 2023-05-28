@@ -4,13 +4,15 @@
 
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
-import { configDefaults, defineConfig } from 'vitest/config';
+import { configDefaults } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import * as path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig, type PluginOption } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr(), tsconfigPaths()],
+  plugins: [react(), svgr(), tsconfigPaths(), visualizer() as PluginOption],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

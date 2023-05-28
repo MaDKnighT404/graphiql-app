@@ -4,6 +4,7 @@ import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
 import { Dispatch, SetStateAction, memo, useState } from 'react';
 import classNames from 'classnames';
 import { ToolsEditor } from './ToolsEditor/ToolsEditor';
+import { useTranslation } from 'react-i18next';
 
 enum Active {
   Headers = 'Headers',
@@ -19,11 +20,11 @@ type Props = {
 };
 
 export const Tools = memo(function Tools(props: Props) {
-  console.log('Tools rendered');
+  const { t } = useTranslation();
+
   const [visible, visibleActive] = useState(false);
   const [activeTab, setActiveTab] = useState<Active>(Active.Variables);
   const openClose = () => {
-    const currentState = visible;
     visibleActive((value) => !value);
   };
 
@@ -32,32 +33,29 @@ export const Tools = memo(function Tools(props: Props) {
       <div className={styles.toolsHeader}>
         <div className={styles.tabs}>
           <Button
-            onClick={() => setActiveTab(Active.Variables)}
-            size={ButtonSize.M}
-            theme={ButtonTheme.OUTLINE}
+            onClick={() => {
+              !visible ? openClose() : null;
+              setActiveTab(Active.Variables);
+            }}
             className={classNames(stylesBtn.btn, {
               [styles.activeTab]: visible && activeTab === Active.Variables,
             })}
           >
-            Variables
+            {t('Variables')}
           </Button>
           <Button
-            onClick={() => setActiveTab(Active.Headers)}
-            size={ButtonSize.M}
-            theme={ButtonTheme.OUTLINE}
+            onClick={() => {
+              !visible ? openClose() : null;
+              setActiveTab(Active.Headers);
+            }}
             className={classNames(stylesBtn.btn, {
               [styles.activeTab]: visible && activeTab === Active.Headers,
             })}
           >
-            Headers
+            {t('Headers')}
           </Button>
         </div>
-        <Button
-          onClick={openClose}
-          size={ButtonSize.M}
-          theme={ButtonTheme.OUTLINE}
-          className={stylesBtn.btn}
-        >
+        <Button onClick={openClose} className={stylesBtn.btn}>
           ^
         </Button>
       </div>

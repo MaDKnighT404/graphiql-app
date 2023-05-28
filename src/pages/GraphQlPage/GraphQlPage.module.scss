@@ -10,6 +10,7 @@
   max-height: 85vh;
 
 
+
 }
 
 .sessions {
@@ -23,7 +24,7 @@
   // max-width: 100%;
   min-width: 320px;
   border-radius: 10px;
-  background-color: red;
+  background-color: var(--bg-color);
   flex: 1;
   min-height: 0;
 }
@@ -33,3 +34,5 @@
   justify-content: start;
   padding: 5px;
 }
+
+

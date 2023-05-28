@@ -16,7 +16,7 @@
 .docsVisible{
   // width: 300px;
   left: 40px;
-  background: white;
+  background: var(--bg-color);
   top: 0;
   bottom: 0;
   z-index: 10;
@@ -28,3 +28,5 @@
  width: 0;
  left: -1000px;
 }
+
+
