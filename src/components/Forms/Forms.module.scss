@@ -13,6 +13,8 @@
 
   .formLabel {
     margin: 10px 0;
+    display: flex;
+    flex-direction: column;
     .formInput {
       color: black;
       border: 0px solid transparent;
