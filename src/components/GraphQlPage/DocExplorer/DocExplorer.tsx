@@ -6,6 +6,7 @@ import { Type } from './Type/Type';
 import { Schema } from './Schema/Schema';
 import { DocHeader } from './DocHeader/DocHeader';
 import { NavContext } from './NavContext';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   docsOpen: boolean;
@@ -14,6 +15,8 @@ type Props = {
 
 export const DocExplorer = ({ docsOpen, schema }: Props) => {
   const context = useContext(NavContext);
+  const { t } = useTranslation();
+
   if (!context) {
     throw new Error('There is no navigation');
   }
@@ -33,7 +36,7 @@ export const DocExplorer = ({ docsOpen, schema }: Props) => {
             {lastGraph ? <Type graph={lastGraph} /> : <Schema schema={schema} />}
           </div>
         ) : (
-          <div>No schema</div>
+          <div>{t('No schema')}</div>
         )}
       </div>
     </NavContext.Provider>

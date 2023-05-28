@@ -40,5 +40,6 @@
   "Schema description": "Схема GraphQL обеспечивает все виды операций.",
   "Data loaded": "Данные получены",
   "Something went wrong": "Что то пошло не так",
-  "Syntax error": "Синтаксическая ошибка"
+  "Syntax error": "Синтаксическая ошибка",
+  "No schema": "Схема отсутствует"
 }

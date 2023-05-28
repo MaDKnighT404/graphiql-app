@@ -1,6 +1,6 @@
 import styles from './Tools.module.scss';
 import stylesBtn from '../Panel/Panel.module.scss';
-import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
+import { Button } from 'components/Button/Button';
 import { Dispatch, SetStateAction, memo, useState } from 'react';
 import classNames from 'classnames';
 import { ToolsEditor } from './ToolsEditor/ToolsEditor';

@@ -2,7 +2,7 @@ import styles from './Editor.module.scss';
 import { Dispatch, SetStateAction, memo, useCallback, useEffect, useRef } from 'react';
 import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
 import { bracketMatching, syntaxHighlighting } from '@codemirror/language';
-import { oneDarkHighlightStyle, oneDark } from '@codemirror/theme-one-dark';
+import { oneDarkHighlightStyle } from '@codemirror/theme-one-dark';
 import { history } from '@codemirror/commands';
 import classNames from 'classnames';
 import { graphql, updateSchema } from 'cm6-graphql';
@@ -10,8 +10,6 @@ import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { GraphQLSchema } from 'graphql';
 import { historyField } from '@codemirror/commands';
 import { ViewUpdate } from '@codemirror/view';
-import { createTheme } from '@uiw/codemirror-themes';
-import { tags as t } from '@lezer/highlight';
 import { useTheme, Theme } from '../../../app/providers/ThemeProvider';
 
 type Props = {
@@ -25,7 +23,6 @@ const stateFields = { history: historyField };
 export const Editor = memo(function Editor({ query, setQuery, schema }: Props) {
   const { theme } = useTheme();
   const editorTheme = theme === Theme.LIGHT ? 'light' : 'dark';
-  console.log('editor rendered');
   const editor = useRef<ReactCodeMirrorRef>(null);
 
   const handleChange = useCallback(

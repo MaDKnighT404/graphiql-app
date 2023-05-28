@@ -2,10 +2,9 @@ import styles from './Panel.module.scss';
 import { Button, ButtonSize, ButtonTheme } from 'components/Button/Button';
 import { Editor } from 'components/GraphQlPage/Editor/Editor';
 import { ReactComponent as Play } from '@/shared/assets/icons/play.svg';
-import classNames from 'classnames';
 import { Tools } from '../Tools/Tools';
-import { useQuery, gql, useLazyQuery } from '@apollo/client';
-import { Suspense, memo, useCallback, useEffect, useState } from 'react';
+import { gql, useLazyQuery } from '@apollo/client';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { Result } from '../Result/Result';
 import { parseString } from 'helpers';
 import { GraphQLSchema } from 'graphql';
@@ -42,12 +41,12 @@ export const Panel = memo(({ schema }: Props) => {
   };
 
   useEffect(() => {
-    console.log('test');
     if (error && !loading) {
       toast.error(t('Something went wrong'));
     } else if (!loading && data && !error) {
       toast.success(t('Data loaded'));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, error, loading]);
 
   const handleClick = useCallback(async () => {

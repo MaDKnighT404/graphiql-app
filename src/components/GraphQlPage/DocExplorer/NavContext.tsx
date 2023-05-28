@@ -1,11 +1,7 @@
-import { GraphQLField, GraphQLInputField, GraphQLArgument, GraphQLNamedType } from 'graphql';
+import { GraphQLField, GraphQLNamedType } from 'graphql';
 import { createContext, useCallback, useState } from 'react';
 
-export type ExplorerField =
-  | GraphQLField<unknown, unknown, unknown>
-  // | GraphQLInputField
-  // | GraphQLArgument
-  | GraphQLNamedType;
+export type ExplorerField = GraphQLField<unknown, unknown, unknown> | GraphQLNamedType;
 
 export type NavigationItem = {
   name: string;
@@ -36,8 +32,8 @@ export const NavigationProvider = ({ children }: Props) => {
         const lastItem = prev.at(-1)!;
         return lastItem.graph === item.graph ? prev : [...prev, item];
       });
-      // console.log(navStack);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [navStack]
   );
 

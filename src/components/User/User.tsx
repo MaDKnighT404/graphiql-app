@@ -1,8 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { auth } from 'firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useAppSelector } from 'redux/hooks';
-import { selectAuthValues } from 'redux/features/auth/authenticationSlice';
 import { useEffect } from 'react';
 import styles from './User.module.scss';
 
@@ -11,7 +9,6 @@ interface UserProps {
 }
 
 export const User: React.FC<UserProps> = ({ scrollTop }) => {
-  const { ...state } = useAppSelector(selectAuthValues);
   const userName = useAuthState(auth)[0]?.displayName as string;
   const { t } = useTranslation();
 

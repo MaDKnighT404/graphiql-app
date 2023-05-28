@@ -1,9 +1,8 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import styles from './Result.module.scss';
-import CodeMirror, { basicSetup } from '@uiw/react-codemirror';
+import CodeMirror from '@uiw/react-codemirror';
 import { Loader } from 'components/Loader/Loader';
 import { json } from '@codemirror/lang-json';
-import { useTheme } from '../../../app/providers/ThemeProvider';
 import { createTheme } from '@uiw/codemirror-themes';
 import { tags as t } from '@lezer/highlight';
 

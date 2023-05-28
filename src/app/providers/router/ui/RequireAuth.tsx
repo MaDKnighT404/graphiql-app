@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { RoutePath } from '../routeConfig/routeConfig';
 
 export function RequireAuth({ children }: { children: JSX.Element }) {
-  // TODO: get auth from state
-  // const auth = useSelector(getUserAuthData);
   const location = useLocation();
   const auth = true;
   if (!auth) {

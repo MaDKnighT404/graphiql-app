@@ -42,5 +42,7 @@
   "mutation": "mutation",
   "Data loaded": "Data loaded",
   "Something went wrong": "Something went wrong",
-  "Syntax error": "Syntax error"
+  "Syntax error": "Syntax error",
+  "No schema": "No schema",
+  "details": "details"
 }

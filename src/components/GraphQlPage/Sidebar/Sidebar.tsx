@@ -3,7 +3,7 @@ import styles from './Sidebar.module.scss';
 import { ReactComponent as Reload } from '@/shared/assets/icons/reload.svg';
 import { ReactComponent as DocIcon } from '@/shared/assets/icons/doc.svg';
 import classNames from 'classnames';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
@@ -17,6 +17,7 @@ export const Sidebar = ({ setDocsOpen, reloading, buildSchemaFromData }: Props) 
 
   const refetchSchema = useCallback(() => {
     buildSchemaFromData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

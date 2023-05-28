@@ -8,7 +8,8 @@ import {
 } from 'graphql';
 import styles from './Type.module.scss';
 import { Fields } from '../Fields/Fields';
-import { ExplorerField, NavigationItem } from '../NavContext';
+import { ExplorerField } from '../NavContext';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   graph: ExplorerField;
@@ -22,6 +23,8 @@ function getType(type: GraphQLType): ExplorerField {
 }
 
 export const Type = ({ graph }: Props) => {
+  const { t } = useTranslation();
+
   const value = graph;
 
   const type = !isNamedType(value) ? getType(value.type) : value;
@@ -42,7 +45,9 @@ export const Type = ({ graph }: Props) => {
       <div className={styles.description}>
         <p>{value.description}</p>
       </div>
-      <div>{type.name} details</div>
+      <div>
+        {type.name} {t('details')}
+      </div>
       <div className={styles.fields}>
         {isObjectType(type) || isInputObjectType(type) ? (
           <Fields fieldsMap={type.getFields()} isFunc={false} />
