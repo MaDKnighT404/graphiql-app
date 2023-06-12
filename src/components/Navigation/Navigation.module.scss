@@ -1,0 +1,19 @@
+.navigationLinkWrapper {
+  display: flex;
+  gap: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+
+  .navigationLink {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: var(--form-button-bg-color);
+    border: 1px solid var(--form-button-border-color);
+    transition: 0.2s ease-in;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--form-button-bg-hover-color);
+    }
+  }
+}

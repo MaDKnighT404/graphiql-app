@@ -1,0 +1,32 @@
+.docs {
+  // position: absolute;
+  padding: 5px;
+  width:300px;
+  border-radius: 5px;
+  overflow-x: auto;
+  scroll-behavior: auto;
+
+
+  .graphQlExplorer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.docsVisible{
+  // width: 300px;
+  left: 40px;
+  background: var(--bg-color);
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.docsInvisible {
+  position: absolute;
+ height: 0;
+ width: 0;
+ left: -1000px;
+}
+
+

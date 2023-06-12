@@ -1,0 +1,27 @@
+.result {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  background: transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  scroll-behavior: auto;
+  overflow:auto;
+
+  .resultCode{
+    // flex: 1 1 0%;
+    background: transparent;
+    border-radius: 10px;
+    overflow:auto;
+    height: 100%;
+    flex: 1 1 0%;
+    margin: 10px;
+    scroll-behavior: auto;
+    min-height: 0;
+  }
+
+}
+
+.cm-gutters {
+  background-color: transparent;
+}

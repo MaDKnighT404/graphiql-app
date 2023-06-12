@@ -1,0 +1,60 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+@import 'reset';
+@import 'normalize';
+@import 'layouts';
+@import 'variables';
+@import 'themes/light';
+@import 'themes/dark';
+@import 'customScroll';
+
+
+html {
+  font-family: Inter, sans-serif, ui-sans-serif, system-ui, -apple-system, Arial;
+  height: 100%;
+  margin: 0;
+  background: var( --bg-color) ;
+}
+
+body {
+  min-height: 100%;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  position: relative;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: var(--primary-color);
+  // background: var(--bg-color);
+  font: var(--font-m);
+}
+
+.main {
+  min-height: 85vh;
+}
+
+section {
+  max-width: 1600px;
+  margin: 0 auto;
+  // padding: 0 20px;
+}
+
+.wrapper{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  width: 100%;
+  overflow: hidden;
+  object-fit: contain;
+  // height: 100%;
+
+}

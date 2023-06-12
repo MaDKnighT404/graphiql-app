@@ -1,0 +1,9 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "ignoreFiles": ["dist/**.css"],
+  "rules": {
+    "indentation": [2],
+    "selector-class-pattern": null,
+    "declaration-colon-newline-after": null
+  }
+}

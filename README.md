@@ -1,1 +1,1 @@
-# graphql
+# Deploy: https://resolvers-grapgql.netlify.app/

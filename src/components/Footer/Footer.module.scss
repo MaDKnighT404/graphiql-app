@@ -1,0 +1,41 @@
+.footer {
+  display: flex;
+  width: 100%;
+  min-height: 5vh;
+  background-color: var(--footer-bg-color);
+
+  .footerContainer {
+    width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .footerTeam {
+      display: flex;
+      align-items: center;
+
+      .footerTeamText {
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      .footerTeamLink {
+        display: flex;
+      }
+    }
+  }
+
+  .rsSchoolLogo,
+  .githubLogo {
+    height: 30px;
+    object-fit: cover;
+    margin: 0 10px;
+    transition: 0.2s ease-in;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

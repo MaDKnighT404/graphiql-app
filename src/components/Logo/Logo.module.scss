@@ -1,0 +1,27 @@
+.logo {
+  width: 200px;
+  height: 100px;
+  background: url('../../shared/assets/images/graphql_logo_text.svg') no-repeat;
+  transition: 0.2s ease-in;
+
+  @media (max-width: 639px) {
+    width: 0;
+  }
+}
+
+.logoAnimated {
+  animation: logoAnim 0.8s forwards;
+}
+
+@keyframes logoAnim {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100px);
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
